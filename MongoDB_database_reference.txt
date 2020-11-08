@@ -1,0 +1,62 @@
+MongoDB database reference
+
+{
+	{
+    "class_name": "CS97",
+    
+    "professor": "EGGERT, PAUL R.",
+    
+    "office_hours": [
+      {
+      	"ta": "SINGHAL, AKSHAY",
+      	"day": "m",
+        "time": ["9:30 AM", "11:30 AM"]
+      }, 
+      {
+      	"ta": "XIE, HOWARD",
+      	"day": "t",
+      	"time": ["1:00 PM", "2:00 PM"]
+      }, 
+      {
+      	"ta": "XIE, HOWARD",
+      	"day": "tr",
+      	"time": ["2:00 PM", "3:00 PM"]
+      }
+    ],
+    
+    "lecture_dates": [
+      {
+      	"day": "t",
+      	"time": ["4:00 PM", "6:00 PM"]
+      },
+      {
+      	"day": "tr",
+      	"time": ["4:00 PM", "6:00 PM"]
+      }
+    ],
+
+    "assignments": [
+      {
+        "assignment_name": "Web-App-Project",
+        "assigned date": "the beginning of time",
+        "description": "Your demise",
+        "due date": {
+        	"date": "2020-12-07",
+          "time": "11:55 PM"
+        },
+        "submission links": "you can email it to me"
+      },
+      {
+        "assignment_name": "Assignment 4",
+        "assigned date": "Eggert be procrastinating on that",
+        "description": "git stuff",
+        "due date": {
+        	"date": "next friday or something lol",
+          "time": "11:55 PM"
+        },
+        "submission links": "somewhere"
+      }
+    ]
+  },
+  ...
+]
