@@ -29,11 +29,16 @@ function Square(text, date, events, assignments) {
 class Day extends React.Component {
   constructor(props) {
       super(props); 
+      var today = new Date();
+      var weekday = today.getDay(); 
+      var date = getDates(weekday, today); 
       this.state = {
           elements: {
               "Assignments": true, 
               "Meetings": true
-          }
+          },
+          currentDate: today, 
+          dates: date
       }; 
   }
     
@@ -54,30 +59,71 @@ class Day extends React.Component {
         3: ["- Midterm 1"],
         4: []
     }
-    
+    /*
     var today = new Date();
     var weekday = today.getDay(); 
-    var dates = getDates(weekday, today); 
+    var dates = getDates(weekday, today); */
     
     if(this.state.elements["Assignments"] === true && this.state.elements["Meetings"] === true) {
-        return Square(days[i], dates[i], meetings[i], assignments[i]);
+        return Square(days[i], this.state.dates[i], meetings[i], assignments[i]);
     }
-    else if (this.state.elements["Assignments"] === true && this.state.elements["Meetings"] == false) {
-        return Square(days[i], dates[i], [], assignments[i]);
+    else if (this.state.elements["Assignments"] === true && this.state.elements["Meetings"] === false) {
+        return Square(days[i], this.state.dates[i], [], assignments[i]);
     }
-    else if (this.state.elements["Assignments"] === false && this.state.elements["Meetings"] == true) {
-        return Square(days[i], dates[i], meetings[i], []);
+    else if (this.state.elements["Assignments"] === false && this.state.elements["Meetings"] === true) {
+        return Square(days[i], this.state.dates[i], meetings[i], []);
     }
     else {
-        return Square(days[i], dates[i], [], []);
+        return Square(days[i], this.state.dates[i], [], []);
     } 
   }
     
   filter(element) {
-      this.state.elements[element] = !this.state.elements[element]
+      if (element === "All") {
+          var changeElement = {
+              "Assignments": true, 
+              "Meetings": true 
+          } 
+          
+      } else {
+          var changeElement = this.state.elements
+          changeElement[element] = !this.state.elements[element]
+      }
+      
       this.setState({
-          elements: this.state.elements
+          elements: changeElement, 
+          currentDate: this.state.currentDate, 
+          dates: this.state.dates
       })
+  }
+    
+  updateWeek(count)
+  {
+      //somehow going to have to grab data from different weeks and update it here too
+     if(count === 1)
+     {
+         var weekday = this.state.currentDate.getDay();  
+         var day = new Date(this.state.currentDate.getTime());
+         day.setDate(this.state.currentDate.getDate()+7);
+         var date = getDates(weekday, day); 
+         this.setState({
+          elements: this.state.elements,
+          currentDate: day, 
+          dates: date
+        })
+     }
+     else if (count === -1)
+     {
+         var weekday = this.state.currentDate.getDay();  
+         var day = new Date(this.state.currentDate.getTime());
+         day.setDate(this.state.currentDate.getDate()-7);
+         var date = getDates(weekday, day); 
+         this.setState({
+          elements: this.state.elements,
+          currentDate: day, 
+          dates: date
+        })   
+     }
   }
 
   render() {
@@ -87,8 +133,8 @@ class Day extends React.Component {
       <div>
         <div className="title">
             {title}
-            <button className="arrows"><span>&lt;</span></button>
-            <button className="arrows"><span>&gt;</span></button>
+            <button className="arrows" onClick={() => this.updateWeek(-1)}><span>&lt;</span></button>
+            <button className="arrows" onClick={() => this.updateWeek(1)}><span>&gt;</span></button>
         </div>
         <div className="day-row">
           {this.renderSquare(0)}
@@ -101,6 +147,7 @@ class Day extends React.Component {
         <div className="calendar-buttons">
             <button className="buttons" onClick={() => this.filter("Assignments")}><span>Assignments</span></button>
             <button className="buttons" onClick={() => this.filter("Meetings")}><span>Meetings</span></button>
+            <button className="buttons" onClick={() => this.filter("All")}><span>Show All</span></button>
         </div>
     </div>
     );
@@ -139,9 +186,8 @@ function datesToString(date)
     return date; 
 }
 
-function getDates(dayofWeek)
+function getDates(dayofWeek, today)
 {
-    var today = new Date();
     var dates = []; 
     //dates before 
     for(let k = dayofWeek; k > 1; k--) {
