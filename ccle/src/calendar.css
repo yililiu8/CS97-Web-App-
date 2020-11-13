@@ -1,0 +1,147 @@
+body {
+  font: 1px "Century Gothic", Futura, sans-serif;
+  margin: 10px;
+}
+
+.cal-list-format {
+  padding-left: 3px;
+  margin-bottom: -8px; 
+  font-weight: 200; 
+}
+
+li { 
+  margin-bottom: 3px; 
+  list-style-type: none;  
+}
+
+.square:focus {
+  outline: black; /* this said none bf */
+}
+
+.square{
+  background: #f9f9f9;
+  border: 1px solid #999;
+  float: left;
+  font-size: 10px;
+  line-height: 34px;
+  height: 200px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  padding-left: 5px; 
+  text-align: left;
+  width: 106px;
+}
+
+.day-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.title {
+  margin-bottom: 7px;
+  padding-right: 10px;  
+  font-size: 19px;
+  color: #152238; 
+}
+
+.filter-label {
+    font-size: 12px; 
+    margin-bottom: -7px; 
+    margin-top: -5px; 
+}
+
+.arrows {
+  margin-right: 20px;  
+  color: floralwhite; 
+  border-radius: 5px;
+  background-color: #C9DAE9;
+  border: none;
+  color: gray;
+  text-align: center;
+  padding: 3px;
+  padding-right: 20px; 
+  padding-left: 20px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  font: 12px "Century Gothic", Futura, sans-serif;
+}
+
+.arrows:hover span {
+  padding: 3px; 
+}
+.arrows span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.calendar-buttons {
+  margin-left: 20px;
+  margin-top: -20px; 
+  margin-bottom: -23px;
+  padding-right: 0px; 
+}
+.buttons {
+  margin-right: 20px;  
+  color: floralwhite; 
+  border-radius: 10px;
+  background-color: #588BAE;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 5px; 
+  padding-right: 20px; 
+  padding-left: 20px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  font: 11px "Century Gothic", Futura, sans-serif;
+}
+
+.buttons:focus {
+    background-color: #7285A5; 
+}
+
+.buttons span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.buttons span:after {
+  content: '\2713';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.buttons:hover span {
+  padding-right: 25px;
+  font-size: 10px;
+}
+
+.buttons:hover span:after {
+  font-size: 10px;
+  opacity: 1;
+  right: 0;
+}
+
+.Cal-assignments{
+  text-align: left;
+  font-size: 9px;
+  display: flex;
+  color: crimson;  
+}
+
+.events {
+  	text-align: left;
+    font-size: 9px;
+    display: flex;
+}
