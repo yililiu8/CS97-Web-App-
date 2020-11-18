@@ -1,6 +1,6 @@
 body {
   font: 1px "Century Gothic", Futura, sans-serif;
-  margin: 10px;
+  margin: 0px;
 }
 
 .cal-list-format {
@@ -20,17 +20,18 @@ li {
 
 .square{
   background: #f9f9f9;
-  border: 1px solid #999;
+  border: 1px dashed #999;
   float: left;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 34px;
   height: 200px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
-  padding-left: 5px; 
+  padding-left: 6px; 
   text-align: left;
-  width: 106px;
+  width: 117px;
+    font-weight: 600; 
 }
 
 .day-row:after {
@@ -40,25 +41,30 @@ li {
 }
 
 .title {
+  margin-top: 25px; 
   margin-bottom: 7px;
   padding-right: 10px;  
   font-size: 19px;
-  color: #152238; 
+  color: #fff; 
+  font-weight: 600; 
+  background-color: #45b6fe; 
+  
 }
 
 .filter-label {
     font-size: 12px; 
     margin-bottom: -7px; 
     margin-top: -5px; 
+    color: #666666; 
 }
 
 .arrows {
   margin-right: 20px;  
   color: floralwhite; 
   border-radius: 5px;
-  background-color: #C9DAE9;
+  background-color: #45b6fe;
   border: none;
-  color: gray;
+  color: #fff;
   text-align: center;
   padding: 3px;
   padding-right: 20px; 
@@ -67,6 +73,7 @@ li {
   cursor: pointer;
   margin: 5px;
   font: 12px "Century Gothic", Futura, sans-serif;
+  border: 2px solid #fff;
 }
 
 .arrows:hover span {
@@ -89,10 +96,11 @@ li {
   margin-right: 20px;  
   color: floralwhite; 
   border-radius: 10px;
-  background-color: #588BAE;
+  background-color: white;
   border: none;
   color: #FFFFFF;
   text-align: center;
+  color: #588BAE; 
   padding: 5px; 
   padding-right: 20px; 
   padding-left: 20px;
@@ -100,10 +108,12 @@ li {
   cursor: pointer;
   margin: 5px;
   font: 11px "Century Gothic", Futura, sans-serif;
+  border: 2px solid #588BAE;
 }
 
 .buttons:focus {
-    background-color: #7285A5; 
+    background-color: #588BAE; 
+    color: #fff; 
 }
 
 .buttons span {
@@ -135,13 +145,13 @@ li {
 
 .Cal-assignments{
   text-align: left;
-  font-size: 9px;
+  font-size: 10px;
   display: flex;
-  color: crimson;  
+  color: #1261a0;  
 }
 
 .events {
   	text-align: left;
-    font-size: 9px;
+    font-size: 10px;
     display: flex;
 }
