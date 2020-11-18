@@ -1,0 +1,82 @@
+h1 {	
+	text-align: center; font-family:'Leckerli One'; font-size: 43px;
+}
+
+h2{
+	color:rgb(0, 0,153); text-align: center; font-style: italic; font-size: 21px;
+}
+
+p1{
+	font: 16px Cambria;
+}
+
+p2{
+	color:rgb(77, 77, 255); font-size: 18px; font-family:Roboto;
+}
+
+p4{
+        font-size: 22px; font-style:bold; color:purple;
+
+}
+
+p5{
+        font-size: 20px; color:rgb(179, 0, 89); font-weight:bold;
+}
+
+body {
+	background-color:rgb(204, 217, 255);
+	margin-left: 25px;
+	margin-right:25px;
+}	
+.row{
+	margin-bottom:3px;
+	padding: 5px;
+}
+.column {
+  float: left;
+  width: 31%;
+  padding: 15px;
+margin-bottom: 17px;
+}
+
+#SpaceDiv {
+	padding-top: 30px;
+}
+
+#Best {
+  font-family: Roboto;
+  border-collapse: collapse;
+  width: 100%;
+  padding-bottom:15px;
+  text-align: center;
+}
+
+#Best td, #Best th {
+  border: 2px solid white;
+  padding: 8px;
+  text-align: center;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: purple;
+  color: white;
+}
+
+#dividerz {
+	padding-top: 30px;
+}
+
+img4 {
+	float:right;
+	margin-right:30px;
+}
+
+.kale {
+  float: right;
+  width: 30%;
+  padding: 15px;
+  margin-bottom: 17px;
+}
