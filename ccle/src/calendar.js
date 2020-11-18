@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './calendar.css';
 
 function Square(text, date, events, assignments) {
+    const lecture = "https://ucla.zoom.us/j/92610844994?pwd=a1dNMGNrakM3Q1JqZ284T1hsMUVadz09&"
     return (<div className="square">
               <div className="box">
               {text} : {date}
@@ -16,10 +17,10 @@ function Square(text, date, events, assignments) {
                   </div>
                   <div className="events">
                       <ul className="cal-list-format">
-                          <li>{events[0]}</li>
-                          <li>{events[1]}</li>
-                          <li>{events[2]}</li>
-                          <li>{events[3]}</li>
+                          <li><a href="https://zoom.us/" className="zoom-links">{events[0]}</a></li>
+                          <li><a href="https://zoom.us/" className="zoom-links">{events[1]}</a></li>
+                          <li><a href="https://zoom.us/" className="zoom-links">{events[2]}</a></li>
+                          <li><a href="https://zoom.us/" className="zoom-links">{events[3]}</a></li>
                       </ul>
                   </div>
               </div>

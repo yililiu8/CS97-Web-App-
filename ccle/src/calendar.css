@@ -150,6 +150,28 @@ li {
   color: #1261a0;  
 }
 
+.zoom-links {
+    text-decoration: none;
+    color: black;
+    transition: all 0.5s;
+}
+
+.zoom-links:visited {
+    text-decoration: none;
+    color: black;
+}
+
+
+.zoom-links:hover{
+    font-size: 10.5px; 
+}
+
+.zoom-links:hover span:after {
+  font-size: 10px;
+  opacity: 1;
+}
+
+
 .events {
   	text-align: left;
     font-size: 10px;
