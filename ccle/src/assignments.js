@@ -42,13 +42,11 @@ export class UpcomingAssignments extends React.Component {
                         <ul>
                             <li>{"due date 11/7"}</li>
                             <li>{"at 7:00pm PST"}</li>
-                            <li>{"submission link"}</li>
                         </ul>
                     <p>{this.renderButton("Assignment 2")}</p>
                         <ul>
                             <li>{"due date 11/8"}</li>
                             <li>{"at 8:00pm PST"}</li>
-                            <li>{"submission link"}</li>
                         </ul>
                 </ul>
             </div>
@@ -68,15 +66,16 @@ class Assignment extends React.Component{
         return (
             <button className="redirect" onClick={this.props.onClick}>
                 {this.props.text}
+            
             </button>
             );
     }
 }
 
-// function Redirect(props) {
-//     return (
-//         <button className="redirect" onClick={props.onClick}> 
-//             {props.text}
-//         </button>
-//     );
-// }
+function Redirect(props) {
+    return (
+        <button className="redirect" onClick={props.onClick}> 
+            {props.text}
+        </button>
+    );
+}
