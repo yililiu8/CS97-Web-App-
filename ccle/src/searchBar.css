@@ -15,6 +15,20 @@
   padding-top: 10px; 
 }
 
+.searchbar input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  margin-left: 8px; 
+  border: solid; 
+  border-width: 1px; 
+  border-radius: 10px; 
+  border-color: black; /*#1167b1; */
+  background: #fff; 
+  font: 15px "Century Gothic", Futura, sans-serif;
+  font-weight: 100; 
+  text-align: right; 
+}
+
 .smaller{
     background: #fff;
     float: left;
@@ -28,4 +42,5 @@
     text-align: left;
     width: 200px;
     font-family: Arial, Helvetica, sans-serif;
+    
 }
