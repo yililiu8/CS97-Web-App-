@@ -35,7 +35,7 @@ export class UpcomingAssignments extends React.Component {
     render() {
       return (
         <div className="assignment-box">
-             <div>{"Upcoming Assignments"}</div>
+             <div className="assignment-title">{"Upcoming Assignments"}</div>
             <div className="assignments">
             	<ul>
                     <p>{this.renderButton("Assignment 1")}</p>

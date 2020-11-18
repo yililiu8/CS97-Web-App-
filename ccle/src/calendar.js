@@ -132,9 +132,9 @@ function Square(text, date, events, assignments) {
       return (
         <div>
           <div className="title">
-              {title}
-              <button className="arrows" onClick={() => this.updateWeek(-1)}><span>&lt;</span></button>
-              <button className="arrows" onClick={() => this.updateWeek(1)}><span>&gt;</span></button>
+                {title}
+                <button className="arrows" onClick={() => this.updateWeek(-1)}><span>&lt;</span></button>
+                <button className="arrows" onClick={() => this.updateWeek(1)}><span>&gt;</span></button>
           </div>
           <div className="day-row">
             {this.renderSquare(0)}

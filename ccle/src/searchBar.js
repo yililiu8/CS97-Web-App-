@@ -57,7 +57,8 @@ const AList = (props) => {
     return(
         <div className = "searchbar">
             <label htmlFor="search">Search by Assignment Name: </label>
-            <input type="text" value = {props.inputValue} onChange = {props.getAssignments}/>
+            <input type="text" value = {props.inputValue} onChange = {props.getAssignments}
+            placeholder="Search..." />
                 {props.inputValue && 
                 <div className = "smaller">
                     Matches : 

@@ -7,9 +7,9 @@ import { UpcomingAssignments } from './assignments.js'
 
 class Textbox extends React.Component {
     render (){
-        return (
+    return (
 	<div className= "header">
-	    <div>{"NEW CCLE"}</div>
+	    <div className= "logo">{"NEW CCLE"}</div>
         <ul>
         <ul>
         <ul>
