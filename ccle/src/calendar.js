@@ -59,22 +59,22 @@ function Square(text, date, events, assignments) {
           3: ["- Midterm 1"],
           4: []
       }
-     
+      /*
       var today = new Date();
       var weekday = today.getDay(); 
-      var dates = getDates(weekday, today); 
+      var dates = getDates(weekday, today); */
       
       if(this.state.elements["Assignments"] === true && this.state.elements["Meetings"] === true) {
-          return Square(days[i], dates[i], meetings[i], assignments[i]);
+          return Square(days[i], this.state.dates[i], meetings[i], assignments[i]);
       }
       else if (this.state.elements["Assignments"] === true && this.state.elements["Meetings"] == false) {
-          return Square(days[i], dates[i], [], assignments[i]);
+          return Square(days[i], this.state.dates[i], [], assignments[i]);
       }
       else if (this.state.elements["Assignments"] === false && this.state.elements["Meetings"] == true) {
-          return Square(days[i], dates[i], meetings[i], []);
+          return Square(days[i], this.state.dates[i], meetings[i], []);
       }
       else {
-          return Square(days[i], dates[i], [], []);
+          return Square(days[i], this.state.dates[i], [], []);
       } 
     }
     
@@ -100,30 +100,34 @@ function Square(text, date, events, assignments) {
     updateWeek(count)
     {
         //somehow going to have to grab data from different weeks and update it here too
-       if(count === 1)
-       {
-           var weekday = this.state.currentDate.getDay();  
-           var day = new Date(this.state.currentDate.getTime());
-           day.setDate(this.state.currentDate.getDate()+7);
-           var date = getDates(weekday, day); 
-           this.setState({
-            elements: this.state.elements,
-            currentDate: day, 
-            dates: date
-          })
-       }
-       else if (count === -1)
-       {
-           var weekday = this.state.currentDate.getDay();  
-           var day = new Date(this.state.currentDate.getTime());
-           day.setDate(this.state.currentDate.getDate()-7);
-           var date = getDates(weekday, day); 
-           this.setState({
-            elements: this.state.elements,
-            currentDate: day, 
-            dates: date
-          })   
-       }
+        if(count === 1)
+        {
+         var weekday_up = this.state.currentDate.getDay();  
+         var day_up = new Date(this.state.currentDate.getTime());
+         day_up.setDate(this.state.currentDate.getDate()+7);
+         var date_up = getDates(weekday_up, day_up); 
+            
+         this.setState({
+          elements: this.state.elements,
+          currentDate: day_up, 
+          dates: date_up
+        })
+        }
+        else if (count === -1)
+        {
+         var weekday = this.state.currentDate.getDay();  
+         var day = new Date(this.state.currentDate.getTime());
+         day.setDate(this.state.currentDate.getDate()-7);
+         var date_down = getDates(weekday, day); 
+            
+         this.setState({
+          elements: this.state.elements,
+          currentDate: day, 
+          dates: date_down
+        })   
+        }
+        
+        
     }
   
     render() {
@@ -163,9 +167,8 @@ function datesToString(date)
     return date; 
 }
 
-function getDates(dayofWeek)
+function getDates(dayofWeek, today)
 {
-    var today = new Date();
     var dates = []; 
     //dates before 
     for(let k = dayofWeek; k > 1; k--) {
