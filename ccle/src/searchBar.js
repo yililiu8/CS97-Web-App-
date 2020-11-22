@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 import './searchBar.css';
 
 export class SearchBar extends React.Component {
@@ -11,7 +11,9 @@ export class SearchBar extends React.Component {
             "Python Scripting", 
             "Shell", 
             "Emacs Editing", 
-            "Lisp"
+            "Lisp",
+            "C Programmings",
+            "Repository Organization"
         ],
             searchValue: ""
         }

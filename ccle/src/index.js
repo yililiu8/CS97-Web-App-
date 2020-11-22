@@ -20,7 +20,11 @@ class Textbox extends React.Component {
         <UpcomingAssignments/>
         <Calendar />
     </div>
+    <div className="search-separate">
+      <SearchBar />
     </div>
+    </div>
+    
       );
     }
 }
@@ -28,18 +32,22 @@ class Textbox extends React.Component {
 class Calendar extends React.Component {
     render() {
       return (
-        <div className= "searchBar">
-            <SearchBar />
+        // <div className= "searchBar">
+        //     <SearchBar />
         <div className="calendar">
-            <div className="calendar-days">
+          <div className="calendar-days">
             <Day />
+          </div>
+          <br></br>
+          <div className="calendar-buttons">
+            <ol>{/* TODO */}</ol>
+          </div>
+          {/* <div className="searchBar">
+            <SearchBar />
+          </div> */}
         </div>
-        <br></br>
-        <div className="calendar-buttons">
-          <ol>{/* TODO */}</ol>
-      </div>
-      </div>
-      </div>
+      
+      //</div>
     );
   }
 }

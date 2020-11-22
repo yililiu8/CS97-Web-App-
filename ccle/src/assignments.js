@@ -73,11 +73,11 @@ class Assignment extends React.Component{
     }
 }
 
-<script type="text/javascript">
+{/* <script type="text/javascript">
     document.getElementById("myButton").onclick = function () {
         window.location.assign("attempt.html")
     };
-</script>
+</script> */}
 
 function Redirect(props) {
     return (
