@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assignments.css';
 
-import {BrowserRouter as Router, Route, Switch, Link, Redirect} from "react-router-dom"
+import {BrowserRouter as Router, Route, Switch, Link, Redirect, useNavigate} from "react-router-dom"; 
 
 export class UpcomingAssignments extends React.Component {
     constructor(props){
@@ -18,11 +18,16 @@ export class UpcomingAssignments extends React.Component {
     }
 
     renderButton(txt){
+        //const navigate = useNavigate(); 
         return (
-            <Assignment 
-                text={txt}
-                onClick={()=>this.onClick(txt)}
-            />
+            <div>
+             <Link to="assignment">{txt}</Link>
+            <Switch> 
+                <Route path="assignment">
+                    <UpcomingAssignments />
+                </Route>
+            </Switch>
+            </div>
         )
     }
     onClick(txt){
@@ -87,4 +92,16 @@ function Redirect_Button(props) {
             {props.text}
         </button>
     );
+}
+
+//test page for an assignment 
+export class Test extends React.Component { 
+    render () {
+        return (
+            <div className="my-assignment">
+                <h3 className="assignment-name">Assignment</h3>
+            </div>
+           ); 
+    }
+    
 }

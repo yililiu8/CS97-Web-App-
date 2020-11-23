@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { Day } from './calendar.js'
 import { SearchBar } from './searchBar.js'
-import { UpcomingAssignments } from './assignments.js'
+import { UpcomingAssignments, Test } from './assignments.js'
 
-import {BrowserRouter as Router, Route, Switch, Link, Redirect} from "react-router-dom"
+import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate} from "react-router-dom"
 
 class Textbox extends React.Component {
     render (){
@@ -18,7 +18,6 @@ class Textbox extends React.Component {
                 <div className="calendar-nav">
                     <Link to="/calendar">Calendar</Link> 
                 </div> 
-        
             </div>
             <Switch> 
                 <Route exact path="/">
@@ -32,6 +31,9 @@ class Textbox extends React.Component {
                 </Route>
                 <Route path="/calendar">
                     <Calendar />
+                </Route>
+                <Route path="/assignment">
+                    <Test />
                 </Route>
             </Switch>
          </Router>
@@ -61,6 +63,8 @@ class Calendar extends React.Component {
     );
   }
 }
+
+
 
 
 
