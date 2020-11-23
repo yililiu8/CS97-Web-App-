@@ -32,6 +32,14 @@ function Square(text, date, events, assignments) {
         super(props); 
         var today = new Date();
         var weekday = today.getDay(); 
+        if (weekday === 0) {
+            weekday = 1
+            today.setDate(today.getDate() + 1); 
+        }
+        else if (weekday = 6) {
+            weekday = 5
+            today.setDate(today.getDate() - 1); 
+        }
         var date = getDates(weekday, today); 
         this.state = {
             elements: {
@@ -171,6 +179,7 @@ function datesToString(date)
 function getDates(dayofWeek, today)
 {
     var dates = []; 
+    
     //dates before 
     for(let k = dayofWeek; k > 1; k--) {
         var day = new Date(today.getTime());
