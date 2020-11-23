@@ -5,26 +5,36 @@ import { Day } from './calendar.js'
 import { SearchBar } from './searchBar.js'
 import { UpcomingAssignments } from './assignments.js'
 
+import {BrowserRouter as Router, Route, Switch, Link, Redirect} from "react-router-dom"
+
 class Textbox extends React.Component {
     render (){
     return (
-	<div className= "header">
-	    <div className= "logo">{"NEW CCLE"}</div>
-        <ul>
-        <ul>
-        <ul>
-        </ul>
-        </ul>
-        </ul>
-    <div className='row1'>
-        <UpcomingAssignments/>
-        <Calendar />
-    </div>
-    <div className="search-separate">
-      <SearchBar />
-    </div>
-    </div>
-    
+        <Router>
+	       <div className= "header">
+	           <div className= "logo">
+                    <Link to="/">NEW CCLE</Link> 
+                </div>
+                <div className="calendar-nav">
+                    <Link to="/calendar">Calendar</Link> 
+                </div> 
+        
+            </div>
+            <Switch> 
+                <Route exact path="/">
+                    <div className='row1'>
+                        <UpcomingAssignments/>
+                        <Calendar />
+                    </div>
+                    <div className="search-separate">
+                        <SearchBar />
+                    </div>
+                </Route>
+                <Route path="/calendar">
+                    <Calendar />
+                </Route>
+            </Switch>
+         </Router>
       );
     }
 }

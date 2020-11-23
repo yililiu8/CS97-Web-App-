@@ -13,7 +13,7 @@ body {
   line-height: 50px;
   height: 90px;
   margin-right: -1px;
-  margin-bottom: 200px;
+  margin-bottom: 20px;
   text-align: center; 
   width: 100%;
 }
@@ -30,6 +30,7 @@ body {
   margin-bottom: 200px;
   text-align: center; 
   width: 51%;
+    min-width: 500px; 
   /* display:flex; 
   flex-direction:row; */
 }
@@ -46,8 +47,21 @@ body {
   display: flex;
   flex-direction: row;
   border-radius: 10px;  
-    min-width: 660px; 
+    min-width: 660px;  
   /*box-shadow: 1px 1px 10px grey; */
+}
+
+.calendar-nav {
+    margin-top: -20px; 
+    font-size: 15px; 
+    text-align: right; 
+    margin-right: 12px; 
+    color: white;
+}
+
+.calendar-nav:visited {
+    text-decoration: none;
+    color: white;
 }
 
 .logo {
@@ -64,7 +78,7 @@ body {
 
 .calendar-days {
     margin-left: 20px;
-    margin-right: -35px; 
+    margin-right: -35px;  
 }
 
 .row1{

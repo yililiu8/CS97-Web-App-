@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assignments.css';
 
+import {BrowserRouter as Router, Route, Switch, Link, Redirect} from "react-router-dom"
+
 export class UpcomingAssignments extends React.Component {
     constructor(props){
         super(props);
@@ -65,7 +67,7 @@ class Assignment extends React.Component{
     render () {
         return (
             //<button id="myButton" class="float-left submit-button" >Home</button>
-            
+                
             <button className="redirect" id = "myButton" onClick={this.props.onClick}>
                 {this.props.text}
             </button>
@@ -79,7 +81,7 @@ class Assignment extends React.Component{
     };
 </script> */}
 
-function Redirect(props) {
+function Redirect_Button(props) {
     return (
         <button className="redirect" onClick={props.onClick}> 
             {props.text}
