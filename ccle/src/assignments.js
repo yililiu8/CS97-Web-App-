@@ -64,13 +64,20 @@ class Assignment extends React.Component{
     }
     render () {
         return (
-            <button className="redirect" onClick={this.props.onClick}>
-                {this.props.text}
+            //<button id="myButton" class="float-left submit-button" >Home</button>
             
+            <button className="redirect" id = "myButton" onClick={this.props.onClick}>
+                {this.props.text}
             </button>
             );
     }
 }
+
+{/* <script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        window.location.assign("attempt.html")
+    };
+</script> */}
 
 function Redirect(props) {
     return (
