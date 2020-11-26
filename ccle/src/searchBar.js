@@ -20,55 +20,44 @@ export class SearchBar extends React.Component {
     }
 
     getAssignments = (e) => {
-        console.log("Onchange says hi!", e.target.value)
         this.setState({
             searchValue: e.target.value,
         })
     }
-
+     
     render() {
-        //const temp_assignments = this.state.assignments;
         const filtered = (this.state.assignments).filter((assign) => {
             return assign.toLowerCase().includes(
                 this.state.searchValue.toLowerCase()
                 );
         })
 
-        const listMatch = filtered.map((match, index) => 
-            <li key = {index}>{match}</li>
-        );
-        // const filtered = temp_assignments.filter(assign => {
-        //     return assign.toLowerCase().includes(this.state.inputValue.toLowerCase())
-        // })
+        fetch(`/hello?q=${this.state.searchValue}`)
+        .then(res => {
+            console.log("RESPONSE", res);
+            return res.json()
+        })
+        .then(data => {
+            console.log("DATA PARSED!!!!", data)
+        })
+        .catch(e => {
+            console.log("ERROR!", e);
+        })
 
-        // const filtered = (this.state.assignments).includes(this.state.searchValue)
-        // console.log(filtered);
-        console.log(listMatch);
+        var listMatch = filtered.map((match, index) => {
+            return (this.state.searchValue) ? <li key={index}><a href="/dummy">{match}</a></li> : null;
+        });
+
+        
         return (
-            <AList 
-            inputValue = {this.state.searchValue} 
-            assignments = {this.state.assignments}
-            getAssignments = {this.getAssignments}
-            result = {listMatch}
-            />
+                <div className = "searchbar">
+                            <label htmlFor="search"> Search by Assignment Name: </label>
+                            <input type="text" value = {this.state.searchValue} onChange = {this.getAssignments} placeholder="Search" />
+                            <ul id="special">
+                                {listMatch}
+                                
+                            </ul>
+                </div>
         )
     }
-}
-
-const AList = (props) => {
-    return(
-        <div className = "searchbar">
-            <label htmlFor="search">Search by Assignment Name: </label>
-            <input type="text" value = {props.inputValue} onChange = {props.getAssignments}
-            placeholder="Search" />
-                {props.inputValue && 
-                <div className = "smaller">
-                    Matches : 
-                    <ul>
-                        {props.result}
-                    </ul>
-                </div>
-                }
-        </div>
-    )
 }

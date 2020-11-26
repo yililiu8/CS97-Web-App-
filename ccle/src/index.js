@@ -5,6 +5,17 @@ import { Day } from './calendar.js'
 import { SearchBar } from './searchBar.js'
 import { UpcomingAssignments } from './assignments.js'
 
+//const express = require('express');
+// const app = express();
+
+// app.use((req, res) => {
+//   res.send('<h1>IS THIS WORKING?<h1>');
+// })
+
+// app.listen(3000, () => {
+//   console.log("LISTENING!");
+// })
+
 class Textbox extends React.Component {
     render (){
     return (
@@ -20,7 +31,7 @@ class Textbox extends React.Component {
         <UpcomingAssignments/>
         <Calendar />
     </div>
-    <div className="search-separate">
+    <div>
       <SearchBar />
     </div>
     </div>
