@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assignments.css';
 
-import {BrowserRouter as Router, Route, Switch, Link, Redirect, useNavigate} from "react-router-dom"; 
+import {BrowserRouter as Router, Route, Switch, Link, Redirect, useParams, useLocation} from "react-router-dom"; 
+
 
 export class UpcomingAssignments extends React.Component {
     constructor(props){
@@ -16,19 +17,18 @@ export class UpcomingAssignments extends React.Component {
                 }
             };
     }
+    
 
     renderButton(txt){
         //const navigate = useNavigate(); 
         return (
-            <div>
-             <Link to="assignment">{txt}</Link>
-            <Switch> 
-                <Route path="assignment">
-                    <UpcomingAssignments />
-                </Route>
-            </Switch>
+            <div key = {txt}>
+             <Link to="Assignment">
+                {txt}
+            </Link>
+            
             </div>
-        )
+        ); 
     }
     onClick(txt){
         const map_index=this.state.class_index[txt];
@@ -94,14 +94,24 @@ function Redirect_Button(props) {
     );
 }
 
+function Pass() {
+    let location = useLocation(); 
+    return (
+        <h3 className="assignment-name">{location.state}</h3>
+    ); 
+}
+
+
 //test page for an assignment 
-export class Test extends React.Component { 
-    render () {
+export function Test({name}){ 
+        let { id } = useParams(); 
         return (
             <div className="my-assignment">
-                <h3 className="assignment-name">Assignment</h3>
+                <h3 className="assignment-name">{id}</h3>
             </div>
            ); 
-    }
     
 }
+
+
+

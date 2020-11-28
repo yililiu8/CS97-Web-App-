@@ -32,9 +32,8 @@ class Textbox extends React.Component {
                 <Route path="/calendar">
                     <Calendar />
                 </Route>
-                <Route path="/assignment">
-                    <Test />
-                </Route>
+                <Route path="/:id"
+                    children={<Test />} />
             </Switch>
          </Router>
       );
