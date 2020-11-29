@@ -5,6 +5,7 @@
 `git clone https://github.com/emilyvainberg12/CS97-Web-App-.git`
 `cd ccle`
 `npm install`
+`npm install --save react-router-dom`
 
 This will install all the required dependencies.
 **The following steps are necessary only if you want to test
