@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assignments.css';
 
+import {BrowserRouter as Router, Route, Switch, Link, Redirect, useParams, useLocation} from "react-router-dom"; 
+
+
 export class UpcomingAssignments extends React.Component {
     constructor(props){
         super(props);
@@ -14,14 +17,20 @@ export class UpcomingAssignments extends React.Component {
                 }
             };
     }
+    
 
     renderButton(txt){
+        //const navigate = useNavigate(); 
         return (
-            <Assignment 
-                text={txt}
-                onClick={()=>this.onClick(txt)}
-            />
-        )
+            <div key = {txt}>
+             <Link to={{
+                pathname: txt
+            }}>
+                {txt}
+            </Link>
+            
+            </div>
+        ); 
     }
     onClick(txt){
         const map_index=this.state.class_index[txt];
@@ -65,7 +74,7 @@ class Assignment extends React.Component{
     render () {
         return (
             //<button id="myButton" class="float-left submit-button" >Home</button>
-            
+                
             <button className="redirect" id = "myButton" onClick={this.props.onClick}>
                 {this.props.text}
             </button>
@@ -79,10 +88,32 @@ class Assignment extends React.Component{
     };
 </script> */}
 
-function Redirect(props) {
+function Redirect_Button(props) {
     return (
         <button className="redirect" onClick={props.onClick}> 
             {props.text}
         </button>
     );
 }
+
+function Pass() {
+    let location = useLocation(); 
+    return (
+        <h3 className="assignment-name">{location.state}</h3>
+    ); 
+}
+
+
+//test page for an assignment 
+export function Test({name}){ 
+        let { id } = useParams(); 
+        return (
+            <div className="my-assignment">
+                <h3 className="assignment-name">{id}</h3>
+            </div>
+           ); 
+    
+}
+
+
+
