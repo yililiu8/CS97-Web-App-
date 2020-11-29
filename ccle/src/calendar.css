@@ -40,6 +40,11 @@ td {
     white-space: nowrap;  
 }
 
+td {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .day-row:after {
   clear: both;
   content: "";
