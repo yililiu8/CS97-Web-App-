@@ -34,10 +34,21 @@ li {
     font-weight: 600; 
 }
 
+td {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .day-row:after {
   clear: both;
   content: "";
   display: table;
+    white-space: nowrap;
+}
+
+table {
+  table-layout: fixed;
+  width: 600px;
 }
 
 .title {
