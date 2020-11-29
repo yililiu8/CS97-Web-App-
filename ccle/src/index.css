@@ -22,13 +22,12 @@ body {
   /* background: #9dd9f3;
   border: 1px solid #000000; */
   float: center;
-  font-size: 35px;
+  /* font-size: 35px;
   font-weight: bold;
-  line-height: 50px;
+  line-height: 50px; */
   height: 90px;
   margin-right: -1px;
   margin-bottom: 200px;
-  text-align: center; 
   width: 51%;
     min-width: 500px; 
   /* display:flex; 
@@ -68,6 +67,7 @@ body {
     padding-top: 20px; 
     background: linear-gradient(to right, white 0%, #fbdb48 50%, white 50%);
   -webkit-background-clip: text;
+  /* background-clip: ; */
   -webkit-text-fill-color: transparent;
 }
 
