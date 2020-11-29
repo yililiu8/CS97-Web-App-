@@ -45,7 +45,6 @@ td {
   content: "";
   display: table;
      white-space: nowrap;
-    
 }
 
 table {
@@ -61,14 +60,17 @@ table {
   color: #fff; 
   font-weight: 600; 
   background-color: #45b6fe; 
-  
+  text-align: center; 
+   padding-top: 9px; 
+  height: 42px; 
 }
 
 .filter-label {
     font-size: 12px; 
-    margin-bottom: -7px; 
-    margin-top: -5px; 
+    margin-bottom: 32px; 
+    margin-top: 20px; 
     color: #666666; 
+    text-align: center; 
 }
 
 .arrows {
@@ -104,6 +106,10 @@ table {
   margin-top: -20px; 
   margin-bottom: -23px;
   padding-right: 0px; 
+  align-content: center; 
+    align-self: center; 
+    text-align: center; 
+     
 }
 .buttons {
   margin-right: 20px;  
