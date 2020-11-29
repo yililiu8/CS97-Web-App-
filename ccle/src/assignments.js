@@ -23,7 +23,9 @@ export class UpcomingAssignments extends React.Component {
         //const navigate = useNavigate(); 
         return (
             <div key = {txt}>
-             <Link to="Assignment">
+             <Link to={{
+                pathname: txt
+            }}>
                 {txt}
             </Link>
             
