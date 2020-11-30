@@ -8,8 +8,7 @@
 `npm install --save react-router-dom`
 
 This will install all the required dependencies.
-**The following steps are necessary only if you want to test
-logging to console behaviour with Express (very basic). The code is currently on the branch *prathyush*.**:
+**To run backend and frontend simultaneously:**:
 
 - `cd ccle/server`
 - `node server.js`
