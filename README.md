@@ -14,4 +14,3 @@ This will install all the required dependencies.
 - `node server.js`
 - Open a new terminal tab and make sure you're in the ccle directory: `npm start`
 - This will run the server and client on two separate terminals
-- To observe the logging to console behaviour, search for something in the search-bar and look at Console.
