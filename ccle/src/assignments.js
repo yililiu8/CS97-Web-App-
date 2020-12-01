@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assignments.css';
 
-import {BrowserRouter as Link, useParams, useLocation} from "react-router-dom"; 
+import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate, useParams, useLocation} from "react-router-dom"; 
 
 
 export class UpcomingAssignments extends React.Component {
