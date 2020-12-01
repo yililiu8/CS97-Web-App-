@@ -36,7 +36,7 @@ function Square(text, date, events, assignments) {
             weekday = 1
             today.setDate(today.getDate() + 1); 
         }
-        else if (weekday = 6) {
+        else if (weekday === 6) {
             weekday = 5
             today.setDate(today.getDate() - 1); 
         }
@@ -79,7 +79,7 @@ function Square(text, date, events, assignments) {
       else if (this.state.elements["Assignments"] === true && this.state.elements["Meetings"] == false) {
           return Square(days[i], this.state.dates[i], [], assignments[i]);
       }
-      else if (this.state.elements["Assignments"] === false && this.state.elements["Meetings"] == true) {
+      else if (this.state.elements["Assignments"] === false && this.state.elements["Meetings"] === true) {
           return Square(days[i], this.state.dates[i], meetings[i], []);
       }
       else {
