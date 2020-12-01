@@ -23,7 +23,7 @@
 
 .assignment-title {
     padding-left: 10px; 
-    background: #77c3ec; 
+    background: ##45b6fe; 
     border-top-right-radius: 7px; 
     border-top-left-radius: 7px; 
     padding-bottom: 5px; 
@@ -37,7 +37,7 @@
   background: none;
   font-weight: bold;
   font-size: 18px;
-  color: #588BAE;
+  color: #45b6fe;
   font: sans-serif;
   text-decoration: underline;
 }

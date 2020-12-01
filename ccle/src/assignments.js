@@ -72,21 +72,13 @@ class Assignment extends React.Component{
         };
     }
     render () {
-        return (
-            //<button id="myButton" class="float-left submit-button" >Home</button>
-                
+        return (             
             <button className="redirect" id = "myButton" onClick={this.props.onClick}>
                 {this.props.text}
             </button>
             );
     }
 }
-
-{/* <script type="text/javascript">
-    document.getElementById("myButton").onclick = function () {
-        window.location.assign("attempt.html")
-    };
-</script> */}
 
 function Redirect_Button(props) {
     return (
@@ -110,6 +102,9 @@ export function Test({name}){
         return (
             <div className="my-assignment">
                 <h3 className="assignment-name">{id}</h3>
+                <div>
+                <p1> Description of Assignment goes here </p1>
+                </div>
             </div>
            ); 
     

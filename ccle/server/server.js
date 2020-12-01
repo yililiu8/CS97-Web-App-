@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const Assignments = require('../models/assignments')
-var mongoDB = 'mongodb+srv://PrathyushS:Prati1991@cluster0.ldqdm.mongodb.net/total_class_information?retryWrites=true&w=majority';
+var mongoDB = 'mongodb+srv://Emily_Vainberg:nreLh64ev12@cluster0.ldqdm.mongodb.net/<dbname>?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("Connection to database established.")
