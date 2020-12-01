@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './assignments.css';
+import Logo from "./books.png"
 
 import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate, useParams, useLocation} from "react-router-dom"; 
 
@@ -47,17 +48,18 @@ export class UpcomingAssignments extends React.Component {
              <div className="assignment-title">{"Upcoming Assignments"}</div>
             <div className="assignments">
             	<ul>
-                    <p>{this.renderButton("Assignment 1")}</p>
+                    <p>{this.renderButton("Assignment 1: Shell Scripting")}</p>
                         <ul>
-                            <li>{"due date 11/7"}</li>
-                            <li>{"at 7:00pm PST"}</li>
+                            <li>{"Due November 7th @ 11:00pm"}</li>
+                            <li>{"Worth 15% of Lab grade"}</li>
                         </ul>
-                    <p>{this.renderButton("Assignment 2")}</p>
+                    <p>{this.renderButton("Assignment 2: Emacs")}</p>
                         <ul>
-                            <li>{"due date 11/8"}</li>
-                            <li>{"at 8:00pm PST"}</li>
+                            <li>{"Due November 12th @ 7:00pm"}</li>
+                            <li>{"10% of homework grade"}</li>
                         </ul>
                 </ul>
+                <img className="photo" src={Logo} />
             </div>
         </div>
         );

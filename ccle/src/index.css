@@ -65,10 +65,10 @@ body {
 
 .logo {
     padding-top: 20px; 
-    background: linear-gradient(to right, white 0%, #fbdb48 50%, white 50%);
-  -webkit-background-clip: text;
-  /* background-clip: ; */
-  -webkit-text-fill-color: transparent;
+    background: linear-gradient(to right, white 0%, #fbdb48 50%, #fbdb48 50%);
+   -webkit-background-clip: text;
+  background-clip: ; 
+   -webkit-text-fill-color: transparent;  
 }
 
 .logo :nth-last-child()  {
