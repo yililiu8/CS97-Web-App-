@@ -1,0 +1,51 @@
+
+.login-box {
+  margin-left: 310px;   
+  background: #fff;
+  float: left;
+  font-weight: lighter;
+  font-size: 25px;
+  line-height: 34px;
+  height: 500px;
+  margin-top: 30px;
+  width: 800px;
+  border-radius: 15px; 
+  
+}
+.login-items {
+    padding-left: 100px; 
+}
+
+.Login {
+    padding-bottom: 15px;
+    text-align: center; 
+    color: #23395d; 
+    /*
+    background: #77c3ec; 
+    border-top-right-radius: 7px; 
+    border-top-left-radius: 7px; 
+    color: #fff; 
+    margin-top: -12px; 
+    padding-top: 15px; 
+    font-weight: 600; */
+}
+
+.email-text {
+   font-size: 16px; 
+   margin-right: 500px; 
+}
+
+.login-field {
+    width: 600px; 
+    height: 28px; 
+    border-radius: 10px; 
+}
+
+.login-button {
+    margin-top: 40px; 
+    width: 610px; 
+    height: 35px; 
+    /*background-color: #D6ecf3; */
+    font: "Century Gothic", Futura, sans-serif;
+    border-radius: 10px; 
+}
