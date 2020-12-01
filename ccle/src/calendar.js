@@ -76,7 +76,7 @@ function Square(text, date, events, assignments) {
       if(this.state.elements["Assignments"] === true && this.state.elements["Meetings"] === true) {
           return Square(days[i], this.state.dates[i], meetings[i], assignments[i]);
       }
-      else if (this.state.elements["Assignments"] === true && this.state.elements["Meetings"] == false) {
+      else if (this.state.elements["Assignments"] === true && this.state.elements["Meetings"] === false) {
           return Square(days[i], this.state.dates[i], [], assignments[i]);
       }
       else if (this.state.elements["Assignments"] === false && this.state.elements["Meetings"] === true) {

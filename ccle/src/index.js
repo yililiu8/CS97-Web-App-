@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { Day } from './calendar.js'
 import { SearchBar } from './searchBar.js'
+import { LoginScreen } from './login.js'
 import { UpcomingAssignments, Test } from './assignments.js'
 
 import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate} from "react-router-dom"
@@ -19,19 +20,30 @@ import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, u
 // })
 
 class Textbox extends React.Component {
+    
     render (){
     return (
         <Router>
 	       <div className= "header">
 	           <div className= "logo">
-                    <Link to="/">NEW CCLE</Link> 
+                    <Link to="/home">NEW CCLE</Link> 
                 </div>
                 <div className="calendar-nav">
-                    <Link to="/calendar">Calendar</Link> 
+                    <Link to="/login">Log Out</Link> 
                 </div> 
             </div>
             <Switch> 
-                <Route exact path="/">
+                <Route exact path="/"
+                render={() => {
+                    return (
+                      <Redirect to="/login" />
+                    )
+                }}
+                />    
+                <Route path="/login">
+                    <LoginScreen />  
+                </Route>
+                <Route exact path="/home">
                     <div className='row1'>
                         <UpcomingAssignments/>
                         <Calendar />
@@ -39,9 +51,6 @@ class Textbox extends React.Component {
                     <div className="search-separate">
                         <SearchBar />
                     </div>
-                </Route>
-                <Route path="/calendar">
-                    <Calendar />
                 </Route>
                 <Route path="/:id"
                     children={<Test />} />
