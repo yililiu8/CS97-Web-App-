@@ -30,7 +30,8 @@ export function LoginScreen() {
           <Form.Label className="email-text">Email</Form.Label>
             <br />
           <Form.Control
-            autoFocus
+            autoFocusls
+            
             type="email"
             className="login-field"
             value={email}

@@ -1,0 +1,29 @@
+
+.event-box {
+  /*border: 2px solid #000000; */
+  float: left;
+  font-weight: lighter;
+  font-size: 20px;
+  line-height: 34px;
+  height: 525px;
+  margin-right: -1px;
+  margin-top: 20px;
+  text-align: left;
+  width: 80%;
+  border-radius: 7px; 
+  float: right;
+}
+
+  .events{
+    background-color: white;
+    font-weight: 100;
+  }
+
+  .picturebox{
+    height: 50px;
+    width: 200px;
+  }
+
+  .h3{
+    font-weight: 200;
+  }

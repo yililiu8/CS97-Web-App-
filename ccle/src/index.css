@@ -5,7 +5,7 @@ body {
 }
 
 .header {
-  background: #9dd9f3; 
+  background: #45b6fe; 
   /*border: 1px solid #000000;*/
   float: center;
   font-size: 35px;
@@ -65,10 +65,10 @@ body {
 
 .logo {
     padding-top: 20px; 
-    background: linear-gradient(to right, white 0%, #fbdb48 50%, white 50%);
-  -webkit-background-clip: text;
-  /* background-clip: ; */
-  -webkit-text-fill-color: transparent;
+    background: linear-gradient(to right, white 0%, #fbdb48 50%, #fbdb48 50%);
+   -webkit-background-clip: text;
+  background-clip: ; 
+   -webkit-text-fill-color: transparent;  
 }
 
 .logo :nth-last-child()  {

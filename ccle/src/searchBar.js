@@ -13,7 +13,6 @@ export class SearchBar extends React.Component {
             sortOption: "Sort"
         }
     }
-
     // getAssignments = (e) => {
     //     this.setState({
     //         searchValue: e.target.value,
