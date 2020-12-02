@@ -20,6 +20,7 @@ const mongoose = require('mongoose');
 const assignSchema = new mongoose.Schema({
     title: String,
     grade: Number,
+    description: String,
     deadline: Date
 })
 

@@ -4,7 +4,7 @@ import './assignments.css';
 import Logo from "./books.png"
 
 import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate, useParams, useLocation} from "react-router-dom"; 
-
+const axios = require('axios');
 
 export class UpcomingAssignments extends React.Component {
     constructor(props){
@@ -98,19 +98,51 @@ function Pass() {
 }
 
 
-//test page for an assignment 
+// returns name of the selected assignment
 export function Test({name}){ 
-        let { id } = useParams(); 
-        return (
-            <div className="my-assignment">
-                <h3 className="assignment-name">{id}</h3>
-                <div>
-                <p1> Description of Assignment goes here </p1>
-                </div>
-            </div>
-           ); 
-    
+    let { id } = useParams();  
+    return (
+        <Description
+            name = { id }
+        />
+    ); 
 }
 
+export class Description extends React.Component {
+constructor(props) {
+    super(props);
+    this.state = {
+        title: this.props.name,
+        description : ""
+    }
+}
+display = () => {
+    fetch(`/description?q="a"`)
+        .then(res => {
+            return res.json()
+        })
+        .then(data => {
+            const matches = data.response[0];
+            // const listMatch = (matches).map(function(match, index){
+            //     return <li key={index}></li>
+            // });
+            console.log("matching objects: " , matches.description);
+            this.setState({
+                description: matches.grade
+            })
+            // use matches[0].description to access the description from database
+        })
+    }
+render() {
+    if (!this.state.description)
+        this.display();
+    return (
+        <div className="my-assignment">
+            <h3 className="assignment-name">{this.state.title}</h3>
+            <h3>{this.state.description}</h3>
+        </div>
+        );
+}     
+}
 
 
