@@ -16,6 +16,7 @@ li {
 
 .square:focus {
   outline: black; /* this said none bf */
+     background: #f9f9f9;
 }
 
 .square{
@@ -171,7 +172,7 @@ table {
   text-align: left;
   font-size: 12px;
   display: flex;
-  color: #1261a0;  
+  color: #1261a0; 
 }
 
 .zoom-links {
@@ -199,8 +200,9 @@ table {
 }
 
 
-.events {
+.Cal-events {
   	text-align: left;
     font-size: 10px;
     display: flex;
+     background: #f9f9f9;
 }

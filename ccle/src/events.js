@@ -7,7 +7,7 @@ export class Events extends React.Component {
     render() {
         return (
           <div className="event-box">
-               <div className="title">{"Events and Annoucements"}</div>
+               <div className="event-title">{"Events and Annoucements"}</div>
               <div className="events">
                   <ul>
                       <h1>{("Finals Week: December 14th-18th")}</h1>
@@ -18,7 +18,6 @@ export class Events extends React.Component {
                   <div className="picturebox">
                   <img src={Logo} alt= "website logo" />
                 </div>
-                
               </div>
           );
       }

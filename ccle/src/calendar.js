@@ -15,7 +15,7 @@ function Square(text, date, events, assignments) {
                           <li>{assignments[3]}</li>
                       </ul>
                   </div>
-                  <div className="events">
+                  <div className="Cal-events">
                       <ul className="cal-list-format">
                           <li><a href="https://zoom.us/" className="zoom-links">{events[0]}</a></li>
                           <li><a href="https://zoom.us/" className="zoom-links">{events[1]}</a></li>

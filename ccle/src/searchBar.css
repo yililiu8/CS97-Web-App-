@@ -54,6 +54,7 @@ select {
   font-weight: 100; 
   text-align: left;
   outline: none;
+     overflow: auto; 
 }
 
 a {

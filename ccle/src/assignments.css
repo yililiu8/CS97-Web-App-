@@ -13,6 +13,7 @@
   text-align: left;
   width: 35%;
   border-radius: 7px; 
+    overflow: auto; 
 }
 
 .assignments{
