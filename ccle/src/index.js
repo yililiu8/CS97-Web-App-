@@ -5,6 +5,7 @@ import { Day } from './calendar.js'
 import { SearchBar } from './searchBar.js'
 import { LoginScreen } from './login.js'
 import { UpcomingAssignments, Test } from './assignments.js'
+import { Events } from './events.js'
 
 import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate} from "react-router-dom"
 
@@ -48,8 +49,10 @@ class Textbox extends React.Component {
                         <UpcomingAssignments/>
                         <Calendar />
                     </div>
-                    <div className="search-separate">
+
+                    <div className= 'row1'>
                         <SearchBar />
+                        <Events/>
                     </div>
                 </Route>
                 <Route path="/:id"
@@ -63,8 +66,6 @@ class Textbox extends React.Component {
 class Calendar extends React.Component {
     render() {
       return (
-        // <div className= "searchBar">
-        //     <SearchBar />
         <div className="calendar">
           <div className="calendar-days">
             <Day />
@@ -82,10 +83,6 @@ class Calendar extends React.Component {
     );
   }
 }
-
-
-
-
 
 ReactDOM.render(
         <Textbox />,

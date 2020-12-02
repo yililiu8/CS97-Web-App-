@@ -13,9 +13,10 @@
   text-align: left;
   width: 35%;
   border-radius: 7px; 
+    overflow: auto; 
 }
 
-.assignments {
+.assignments{
   text-align: left;
   font-size: 16px;
   display: flex;
@@ -23,12 +24,13 @@
 
 .assignment-title {
     padding-left: 10px; 
-    background: #77c3ec; 
+    background: #45b6fe; 
     border-top-right-radius: 7px; 
     border-top-left-radius: 7px; 
     padding-bottom: 5px; 
     padding-top: 5px; 
     color: #fff; 
+    font: Times;
 }
 
 .redirect {
@@ -37,7 +39,7 @@
   background: none;
   font-weight: bold;
   font-size: 18px;
-  color: #588BAE;
+  color: #45b6fe;
   font: sans-serif;
   text-decoration: underline;
 }
@@ -67,4 +69,8 @@
     padding-top: 5px; 
     color: #fff; 
     margin-top: -12px; 
+}
+.photo{
+  height: 100px;
+  width: 100px; 
 }
