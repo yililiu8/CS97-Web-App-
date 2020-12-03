@@ -10,7 +10,7 @@ var mongoDB = 'mongodb+srv://jlam7:Jlam2001@cluster0.ldqdm.mongodb.net/total_cla
 //our current date
 //we turn the dates into string to make them easier to compare
 //" '0'+... .slice(-2) " accounts for leading 0s.
-var currentdate = new Date(); 
+var currentdate = new Date();
 var date = ('0' + currentdate.getDate()).slice(-2);
 var month = ('0'+(currentdate.getMonth()+1)).slice(-2);
 var year = currentdate.getFullYear();
@@ -94,7 +94,7 @@ app.get('/login', async function(req, res) {
     .then((result) => res.send({response: result}))
     .catch((failure) => res.send({response: failure}));
   }
-  else 
+  else
     res.send({response: false});
   // if(a_matches) {
   //   const result = login(password, a_matches.hash);
