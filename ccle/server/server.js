@@ -92,7 +92,7 @@ app.get('/description', async function(req, res){
   // const {q} = req.query;
   console.log("called app.get for assignment description");
   const d_matches = await Assignments.find({
-    title: "Python Scripting"
+    title: "Lisp and Python Scripting"
   });
   console.log(d_matches);
   console.log("outputted matching object");
