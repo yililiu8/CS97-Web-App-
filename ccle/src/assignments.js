@@ -9,17 +9,63 @@ const axios = require('axios');
 export class UpcomingAssignments extends React.Component {
     constructor(props){
         super(props);
+        // need to have it access the database
         this.state={
-            assignment_list: ["Class 1", "Class 2"], // Create a function that can retrieve
-            button_status: [false, false], // necessary number of classes and names
-            class_index : { // also create dictionary to be used
-                "Assignment 1" : 0,
-                "Assignment 2" : 1
-                }
-            };
+            queried: false,
+            assignments: [[],[],[],[]]
+        };
     }
-    
 
+    // attempting to access database to return summaries
+    display = () => {
+        fetch(`/summary?q=""`)
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                const matches = data.response; // array of all the assignments
+                const num_assign = 4; // number of assignments
+                const num_attr = 4; // number of attributes per assignment
+                var assign1, assign2, assign3, assign4 = [];
+                for (let i = 0; i < num_assign; i++){
+                    let temp = [];
+                    for (let j = 0; j < num_attr; j++){
+                        if (j==2)
+                            temp.push(matches[j][i].slice(0,10));
+                        else
+                            temp.push(matches[j][i]);
+                    }
+                    let title = temp[0] + " - " + temp[1];
+                    temp[1] = title;
+                    temp = temp.slice(1,4);
+                    // console.log(temp);
+                    // console.log(title);
+                    switch(i){
+                        case 0:
+                            assign1 = temp;
+                            break;
+                        case 1:
+                            assign2 = temp;
+                            break;
+                        case 2:
+                            assign3 = temp;
+                            break;
+                        case 3:
+                            assign4 = temp;
+                            break;
+                        default:
+                            continue;
+                    }
+                }
+                this.setState({
+                    queried: true,
+                    assignments: [assign1,assign2,assign3,assign4]  
+                    // returns the four classes that appear at the top of the assignment list
+                    // not sorted yet for time dependency         
+                })
+            })
+        }
+    
     renderButton(txt){
         //const navigate = useNavigate(); 
         return (
@@ -29,34 +75,29 @@ export class UpcomingAssignments extends React.Component {
             }}>
                 {txt}
             </Link>
-            
             </div>
         ); 
     }
-    onClick(txt){
-        const map_index=this.state.class_index[txt];
-        const a = this.state.button_status.slice();
-        a[map_index] = !a[map_index];
-        this.setState({
-            button_status: a,
-        });
-        console.log(a);
-    }
+
     render() {
+      // ony call query the database once when the website launches
+      if (!this.state.queried)
+        this.display(); 
+        console.log(this.state.assignments[1]);
       return (
         <div className="assignment-box">
              <div className="assignment-title">{"Upcoming Assignments"}</div>
             <div className="assignments">
-            	<ul>
-                    <p>{this.renderButton("Assignment 1: Shell Scripting")}</p>
+                <ul>
+                    <p>{this.renderButton(this.state.assignments[0][0])}</p>
                         <ul>
-                            <li>{"Due November 7th @ 11:00pm"}</li>
-                            <li>{"Worth 15% of Lab grade"}</li>
+                            <li>{this.state.assignments[0][1]}</li>
+                            <li>{this.state.assignments[0][2]}</li>
                         </ul>
-                    <p>{this.renderButton("Assignment 2: Emacs")}</p>
+                    <p>{this.renderButton(this.state.assignments[1][0])}</p>
                         <ul>
-                            <li>{"Due November 12th @ 7:00pm"}</li>
-                            <li>{"10% of homework grade"}</li>
+                            <li>{this.state.assignments[1][1]}</li>
+                            <li>{this.state.assignments[1][2]}</li>
                         </ul>
                 </ul>
                 <img className="photo" src={Logo} />
@@ -66,21 +107,23 @@ export class UpcomingAssignments extends React.Component {
     }
 }
 
-class Assignment extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            clicked: false,
-        };
-    }
-    render () {
-        return (             
-            <button className="redirect" id = "myButton" onClick={this.props.onClick}>
-                {this.props.text}
-            </button>
-            );
-    }
-}
+
+// no longer needed
+// class Assignment extends React.Component{
+//     constructor(props){
+//         super(props);
+//         this.state={
+//             clicked: false,
+//         };
+//     }
+//     render () {
+//         return (             
+//             <button className="redirect" id = "myButton" onClick={this.props.onClick}>
+//                 {this.props.text}
+//             </button>
+//             );
+//     }
+// }
 
 function Redirect_Button(props) {
     return (
@@ -117,7 +160,7 @@ constructor(props) {
     }
 }
 display = () => {
-    fetch(`/description?q="a"`)
+    fetch(`/description?q=""`)
         .then(res => {
             return res.json()
         })

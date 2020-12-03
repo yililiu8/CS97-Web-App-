@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const Assignments = require('../models/assignments')
-var mongoDB = 'mongodb+srv://Emily_Vainberg:nreLh64ev12@cluster0.ldqdm.mongodb.net/total_class_information?retryWrites=true&w=majority';
+var mongoDB = 'mongodb+srv://jlam7:Jlam2001@cluster0.ldqdm.mongodb.net/total_class_information?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("Connection to database established.")
@@ -50,7 +50,7 @@ app.get('/search', async function(req, res){
 app.get('/', (req, res) => {
     res.send(req);
 })
-app.listen(3001, () => {
+app.listen(3000, () => {
   console.log("LISTENING!");
 })
 
@@ -64,3 +64,30 @@ app.get('/description', async function(req, res){
   console.log("outputted matching object");
   res.send( {response: d_matches} );
 })
+
+app.get('/summary', async function(req, res){
+  console.log("called app.get for assignment summary");
+  const d_matches = await Assignments.find({});
+  const matches = parseMatchesSummary(d_matches);
+  console.log("outputted matching object");
+  res.send( {response: matches} );
+})
+
+function parseMatchesSummary(a_matches) {
+  var classes = []
+  var titles = []
+  var dueDates = []
+  var summaries = []
+  for (let i of a_matches) {
+    classes.push(i.class);
+    titles.push(i.title);
+    dueDates.push(i.deadline);
+    summaries.push(i.description);
+  }
+  return [
+    classes,
+    titles,
+    dueDates,
+    summaries
+  ];
+}

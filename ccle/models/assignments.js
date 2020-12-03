@@ -19,6 +19,7 @@ const mongoose = require('mongoose');
 //     })
 const assignSchema = new mongoose.Schema({
     title: String,
+    class: String,
     grade: Number,
     description: String,
     deadline: Date
