@@ -134,10 +134,10 @@ app.listen(3000, () => {
 })
 
 app.get('/description', async function(req, res){
-  // const {q} = req.query;
-  console.log("called app.get for assignment description");
+  const {q} = req.query;
+  console.log("called app.get for assignment description : " + q);
   const d_matches = await Assignments.find({
-    title: "Lisp and Python Scripting"
+    title: q
   });
   console.log(d_matches);
   console.log("outputted matching object");

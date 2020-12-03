@@ -22,6 +22,7 @@ const assignSchema = new mongoose.Schema({
     class: String,
     grade: Number,
     description: String,
+    information: String,
     deadline: Date
 })
 

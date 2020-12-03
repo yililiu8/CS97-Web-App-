@@ -35,10 +35,10 @@ export class UpcomingAssignments extends React.Component {
                         else
                             temp.push(matches[j][i]);
                     }
-                    let title = temp[0] + " - " + temp[1];
-                    temp[1] = title;
-                    temp = temp.slice(1,4);
-                    // console.log(temp);
+                    // let title = temp[0] + " - " + temp[1];
+                    // temp[1] = title;
+                    // temp = temp.slice(1,4);
+                    console.log(temp);
                     // console.log(title);
                     switch(i){
                         case 0:
@@ -66,14 +66,14 @@ export class UpcomingAssignments extends React.Component {
             })
         }
     
-    renderButton(txt){
+    renderButton(group, title){
         //const navigate = useNavigate(); 
         return (
-            <div key = {txt}>
+            <div key = {title}>
              <Link to={{
-                pathname: txt
+                pathname: title
             }}>
-                {txt}
+                {group + " - " + title}
             </Link>
             </div>
         ); 
@@ -89,25 +89,25 @@ export class UpcomingAssignments extends React.Component {
              <div className="assignment-title">{"Upcoming Assignments"}</div>
             <div className="assignments">
                 <ul>
-                    <p>{this.renderButton(this.state.assignments[0][0])}</p>
+                    <p>{this.renderButton(this.state.assignments[0][0], this.state.assignments[0][1])}</p>
                         <ul>
-                            <li>{this.state.assignments[0][1]}</li>
                             <li>{this.state.assignments[0][2]}</li>
+                            <li>{this.state.assignments[0][3]}</li>
                         </ul>
-                    <p>{this.renderButton(this.state.assignments[1][0])}</p>
+                    <p>{this.renderButton(this.state.assignments[1][0], this.state.assignments[1][1])}</p>
                         <ul>
-                            <li>{this.state.assignments[1][1]}</li>
                             <li>{this.state.assignments[1][2]}</li>
+                            <li>{this.state.assignments[1][3]}</li>
                         </ul>
-                    <p>{this.renderButton(this.state.assignments[2][0])}</p>
+                    <p>{this.renderButton(this.state.assignments[2][0], this.state.assignments[2][1])}</p>
                         <ul>
-                            <li>{this.state.assignments[2][1]}</li>
                             <li>{this.state.assignments[2][2]}</li>
+                            <li>{this.state.assignments[2][3]}</li>
                         </ul>
-                    <p>{this.renderButton(this.state.assignments[3][0])}</p>
+                    <p>{this.renderButton(this.state.assignments[3][0], this.state.assignments[3][1])}</p>
                         <ul>
-                            <li>{this.state.assignments[3][1]}</li>
                             <li>{this.state.assignments[3][2]}</li>
+                            <li>{this.state.assignments[3][3]}</li>
                         </ul>
                 </ul>
                 <img className="photo" src={Logo} />
@@ -116,24 +116,6 @@ export class UpcomingAssignments extends React.Component {
         );
     }
 }
-
-
-// no longer needed
-// class Assignment extends React.Component{
-//     constructor(props){
-//         super(props);
-//         this.state={
-//             clicked: false,
-//         };
-//     }
-//     render () {
-//         return (             
-//             <button className="redirect" id = "myButton" onClick={this.props.onClick}>
-//                 {this.props.text}
-//             </button>
-//             );
-//     }
-// }
 
 function Redirect_Button(props) {
     return (
@@ -166,24 +148,26 @@ constructor(props) {
     super(props);
     this.state = {
         title: this.props.name,
-        description : ""
+        description : "", // not sure if this is necessary, since it was alsready shown on home page
+        class: "",
+        deadline: "",
+        information: "" // complete assignment specification
     }
 }
 display = () => {
-    fetch(`/description?q=""`)
+    fetch(`/description?q=${this.state.title}`)
         .then(res => {
             return res.json()
         })
         .then(data => {
             const matches = data.response[0];
-            // const listMatch = (matches).map(function(match, index){
-            //     return <li key={index}></li>
-            // });
-            console.log("matching objects: " , matches.description);
+            console.log("matching objects: " , matches);
             this.setState({
-                description: matches.grade
+                description: matches.description,
+                class: matches.class,
+                information: matches.information,
+                deadline: matches.deadline
             })
-            // use matches[0].description to access the description from database
         })
     }
 render() {
@@ -191,8 +175,14 @@ render() {
         this.display();
     return (
         <div className="my-assignment">
-            <h3 className="assignment-name">{this.state.title}</h3>
-            <h3>{this.state.description}</h3>
+            <ul>
+                <p className="assignment-name">{this.state.class + " - " +this.state.title}</p>
+                <ul>
+                    <li>{"Due Date : " + this.state.deadline.slice(0,10)}</li>
+                    <li>{"Assignment Specification"}</li>
+                    <li>{this.state.information}</li>
+                </ul>
+            </ul>
         </div>
         );
 }     
