@@ -114,18 +114,14 @@ app.get('/search/sort', async function(req, res) {
 
 app.get('/search', async function(req, res){
     const q = req.query.q;
-    //console.log("Called app.get")
     console.log("Search string backend: ",q);
-    // if (q === '') {
-    //   res.send({ responses: null });
-    // }
     const a_matches = await Assignments.find({
       title: {"$regex": q, "$options": "i"}
     });
     //console.log(a_matches);
-    const matches = await parseMatches(a_matches);
+    const matches = parseMatches(a_matches);
     console.log(matches);
-    await res.send( {response: matches});
+    res.send( {response: matches});
 })
 
 app.get('/', (req, res) => {

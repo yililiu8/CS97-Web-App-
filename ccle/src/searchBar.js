@@ -10,34 +10,31 @@ export class SearchBar extends React.Component {
             assignments: [
         ],
             searchValue: "",
-            sortOption: "Sort"
+            sortOption: "Sort",
         }
     }
-    // getAssignments = (e) => {
-    //     this.setState({
-    //         searchValue: e.target.value,
-    //     })
-    //}
 
     handleChange = (e) => {
         this.setState({
             searchValue: e.target.value,
         })
-        fetch(`/search?q=${e.target.value}`)
-        .then(res => {
-            return res.json()
-        })
-        .then(data => {
-            const matches = data.response;
-            const listMatch = (matches).map(function(match, index){
-                return <li key={index}><a href="/dummy">{match}</a></li>
-            });
-            this.setState({
-                assignments: this.state.searchValue ? listMatch : null,
-                //searchValue: e.target.value,
+        if(!this.state.loading) {
+            fetch(`/search?q=${e.target.value}`)
+            .then(res => {
+                return res.json()
             })
-            console.log("Matches: ", this.state.assignments);
-        })
+            .then(data => {
+                const matches = data.response;
+                const listMatch = (matches).map(function(match, index){
+                    return <li key={index}><a href="/dummy">{match}</a></li>
+                });
+                this.setState({
+                    assignments: this.state.searchValue ? listMatch : null,
+                    //searchValue: e.target.value,
+                })
+                console.log("Matches: ", this.state.assignments);
+            })
+        }
     }
 
     handleClick = (e) => {
