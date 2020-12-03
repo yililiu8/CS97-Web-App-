@@ -48,24 +48,36 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
         console.log(err)
     })
 
-function parseMatches(a_matches) {
+
+
+
+function parseMatches(a_matches, sort) {
+  console.log("PARSEMATCHES received: ", sort);
   var matches =[]
   var ids = []
-  for (let i of a_matches) {
-    matches.push(i.title);
-    ids.push(i._id);
+  if(sort === "Sort by:") {
+    for (let i of a_matches) {
+      matches.push(i.title);
+      ids.push(i._id);
+    }
+  }
+  else if (sort === "Grade Weightage") {
+    a_matches.sort(function(a,b) {
+      if (a.grade > b.grade) {
+        return -1;
+      }
+      else if (a.grade < b.grade) {
+        return 1;
+      }
+      else {
+        return 0;
+      }
+    });
+    for(let i of a_matches) {
+      matches.push(i.title);
+    }
   }
   return matches;
-}
-
-const login = async (pw, hashedPw) => {
-  const result = await bcrypt.compare(pw, hashedPw);
-  if (result) {
-      console.log("LOGGED YOU IN! SUCCESSFUL MATCH!", result)
-  } else {
-      console.log("INCORRECT!")
-  }
-  return result;
 }
 
 app.get('/login', async function(req, res) {
@@ -80,14 +92,6 @@ app.get('/login', async function(req, res) {
   if(!a_matches) {
     a_matches = null;
   }
-  // const login = async (pw, hashedPw) => {
-  //   const result = await bcrypt.compare(pw, hashedPw);
-  //   if (result) {
-  //       console.log("LOGGED YOU IN! SUCCESSFUL MATCH!")
-  //   } else {
-  //       console.log("INCORRECT!")
-  //   }
-  // }
   if(a_matches) {
     bcrypt.compare(password, a_matches.hash)
     .then((result) => res.send({response: result}))
@@ -95,11 +99,6 @@ app.get('/login', async function(req, res) {
   }
   else 
     res.send({response: false});
-  // if(a_matches) {
-  //   const result = login(password, a_matches.hash);
-  //   res.send({response: result});
-  // }
-  //res.send({response: req.query});
 })
 
 app.get('/search/sort', async function(req, res) {
@@ -114,12 +113,14 @@ app.get('/search/sort', async function(req, res) {
 
 app.get('/search', async function(req, res){
     const q = req.query.q;
+    const sort = req.query.sort;
+    console.log("/SEARCH sort value: ", sort);
     console.log("Search string backend: ",q);
     const a_matches = await Assignments.find({
       title: {"$regex": q, "$options": "i"}
     });
     //console.log(a_matches);
-    const matches = parseMatches(a_matches);
+    const matches = parseMatches(a_matches, sort);
     console.log(matches);
     res.send( {response: matches});
 })
