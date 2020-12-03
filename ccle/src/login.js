@@ -6,14 +6,26 @@ import Button from "react-bootstrap/Button";
 import './login.css';
 import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate} from "react-router-dom"; 
 
+var data1 = false;
+
+
+
 
 export function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [valid, setValid] = useState("");
 
     //this is where you make sure the username/password is correct and save 
   function validateForm() {
-    return email.length > 0 && password.length > 0;
+    fetch(`/login?email=${email}&password=${password}`)
+    .then(res => {
+      return res.json()
+    })
+    .then(data => {
+      setValid(data.response);
+    })
+    return valid;
   }
 
   function handleSubmit(event) {
