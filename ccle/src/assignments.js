@@ -99,6 +99,16 @@ export class UpcomingAssignments extends React.Component {
                             <li>{this.state.assignments[1][1]}</li>
                             <li>{this.state.assignments[1][2]}</li>
                         </ul>
+                    <p>{this.renderButton(this.state.assignments[2][0])}</p>
+                        <ul>
+                            <li>{this.state.assignments[2][1]}</li>
+                            <li>{this.state.assignments[2][2]}</li>
+                        </ul>
+                    <p>{this.renderButton(this.state.assignments[3][0])}</p>
+                        <ul>
+                            <li>{this.state.assignments[3][1]}</li>
+                            <li>{this.state.assignments[3][2]}</li>
+                        </ul>
                 </ul>
                 <img className="photo" src={Logo} />
             </div>

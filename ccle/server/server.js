@@ -3,6 +3,40 @@ const app = express();
 const mongoose = require('mongoose');
 const Assignments = require('../models/assignments')
 var mongoDB = 'mongodb+srv://jlam7:Jlam2001@cluster0.ldqdm.mongodb.net/total_class_information?retryWrites=true&w=majority';
+
+/////////DATES AND TIMES FOR DEADLINE COMPARISONS///////////
+//our current date
+//we turn the dates into string to make them easier to compare
+//" '0'+... .slice(-2) " accounts for leading 0s.
+var currentdate = new Date(); 
+var date = ('0' + currentdate.getDate()).slice(-2);
+var month = ('0'+(currentdate.getMonth()+1)).slice(-2);
+var year = currentdate.getFullYear();
+var hour = ('0' + currentdate.getHours()).slice(-2);
+var minutes = ('0' + currentdate.getMinutes()).slice(-2);
+var seconds = ('0' + currentdate.getSeconds()).slice(-2);
+var date_string=year+"-"+month+"-"+date+"T"+hour+":"+minutes+":"+seconds+".000+00:00";
+console.log("The current time is: "+ date_string)
+
+//function to compare deadlines
+function compareDate(deadline) {
+  var dldate = ('0' + deadline.getDate()).slice(-2);
+  var dlmonth = ('0'+(deadline.getMonth()+1)).slice(-2);
+  var dlyear = deadline.getFullYear();
+  var dlhour = ('0' + deadline.getHours()).slice(-2);
+  var dlminutes = ('0' + deadline.getMinutes()).slice(-2);
+  var dlseconds = ('0' + deadline.getSeconds()).slice(-2);
+  var dl_date_string=dlyear+"-"+dlmonth+"-"+dldate+"T"+dlhour+":"+dlminutes+":"+dlseconds+".000+00:00";
+  console.log("Comparing deadline time is: "+ dl_date_string)
+
+  //we use localeCompare for string comparison of the dates
+  if (dl_date_string.localeCompare(date_string) == 1)
+    return false;
+  return true;
+}
+/////////DATES AND TIMES FOR DEADLINE COMPARISONS///////////
+
+
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("Connection to database established.")
@@ -73,12 +107,15 @@ app.get('/summary', async function(req, res){
   res.send( {response: matches} );
 })
 
+//This creates arrays of upcoming asssignments
 function parseMatchesSummary(a_matches) {
   var classes = []
   var titles = []
   var dueDates = []
   var summaries = []
   for (let i of a_matches) {
+    if (compareDate(i.deadline))
+      continue;
     classes.push(i.class);
     titles.push(i.title);
     dueDates.push(i.deadline);
