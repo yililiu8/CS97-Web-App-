@@ -53,14 +53,3 @@ app.get('/', (req, res) => {
 app.listen(3001, () => {
   console.log("LISTENING!");
 })
-
-app.get('/description', async function(req, res){
-  // const {q} = req.query;
-  console.log("called app.get for assignment description");
-  const d_matches = await Assignments.find({
-    title: "Python Scripting"
-  });
-  console.log(d_matches);
-  console.log("outputted matching object");
-  res.send( {response: d_matches} );
-})
