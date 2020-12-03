@@ -23,7 +23,7 @@ export class SearchBar extends React.Component {
         this.setState({
             searchValue: e.target.value,
         })
-        fetch(`/search?q=${this.state.searchValue}`)
+        fetch(`/search?q=${e.target.value}`)
         .then(res => {
             return res.json()
         })
@@ -33,7 +33,8 @@ export class SearchBar extends React.Component {
                 return <li key={index}><a href="/dummy">{match}</a></li>
             });
             this.setState({
-                assignments: this.state.searchValue ? listMatch : null
+                assignments: this.state.searchValue ? listMatch : null,
+                //searchValue: e.target.value,
             })
             console.log("Matches: ", this.state.assignments);
         })
