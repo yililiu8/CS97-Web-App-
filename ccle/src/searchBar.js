@@ -1,7 +1,6 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
 import './searchBar.css';
-const axios = require('axios');
 
 export class SearchBar extends React.Component {
     constructor(props) {
