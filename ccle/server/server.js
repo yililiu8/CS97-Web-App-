@@ -10,7 +10,7 @@ var mongoDB = 'mongodb+srv://jlam7:Jlam2001@cluster0.ldqdm.mongodb.net/total_cla
 //our current date
 //we turn the dates into string to make them easier to compare
 //" '0'+... .slice(-2) " accounts for leading 0s.
-var currentdate = new Date(); 
+var currentdate = new Date();
 var date = ('0' + currentdate.getDate()).slice(-2);
 var month = ('0'+(currentdate.getMonth()+1)).slice(-2);
 var year = currentdate.getFullYear();
@@ -58,8 +58,7 @@ function parseMatches(a_matches) {
   return matches;
 }
 
-<<<<<<< HEAD
-=======
+
 const login = async (pw, hashedPw) => {
   const result = await bcrypt.compare(pw, hashedPw);
   if (result) {
@@ -95,7 +94,7 @@ app.get('/login', async function(req, res) {
     .then((result) => res.send({response: result}))
     .catch((failure) => res.send({response: failure}));
   }
-  else 
+  else
     res.send({response: false});
   // if(a_matches) {
   //   const result = login(password, a_matches.hash);
@@ -103,7 +102,7 @@ app.get('/login', async function(req, res) {
   // }
   //res.send({response: req.query});
 })
->>>>>>> 1ce02cfda148942eb17711d43e284735262ba00a
+
 
 app.get('/search/sort', async function(req, res) {
   const {q} = req.query;
