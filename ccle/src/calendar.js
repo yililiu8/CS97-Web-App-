@@ -170,7 +170,6 @@ function Square(text, date, events, assignments) {
             }
         }
         
-        
         this.state = {
             elements: {
                 "Assignments": true, 

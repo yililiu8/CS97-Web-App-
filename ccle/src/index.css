@@ -46,7 +46,7 @@ body {
   display: flex;
   flex-direction: row;
   border-radius: 10px;  
-    min-width: 880px;  
+    min-width: 880px;
   /*box-shadow: 1px 1px 10px grey; */
 }
 
