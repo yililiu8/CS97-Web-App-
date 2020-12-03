@@ -58,6 +58,7 @@ function parseMatches(a_matches) {
   return matches;
 }
 
+
 const login = async (pw, hashedPw) => {
   const result = await bcrypt.compare(pw, hashedPw);
   if (result) {
@@ -101,6 +102,7 @@ app.get('/login', async function(req, res) {
   // }
   //res.send({response: req.query});
 })
+
 
 app.get('/search/sort', async function(req, res) {
   const {q} = req.query;
