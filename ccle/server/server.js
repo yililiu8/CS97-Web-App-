@@ -1,6 +1,8 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const app = express();
 const mongoose = require('mongoose');
+const Users = require('../models/users');
 const Assignments = require('../models/assignments')
 var mongoDB = 'mongodb+srv://jlam7:Jlam2001@cluster0.ldqdm.mongodb.net/total_class_information?retryWrites=true&w=majority';
 
@@ -56,22 +58,63 @@ function parseMatches(a_matches) {
   return matches;
 }
 
+const login = async (pw, hashedPw) => {
+  const result = await bcrypt.compare(pw, hashedPw);
+  if (result) {
+      console.log("LOGGED YOU IN! SUCCESSFUL MATCH!", result)
+  } else {
+      console.log("INCORRECT!")
+  }
+  return result;
+}
+
+app.get('/login', async function(req, res) {
+  //const {email, password} = req.query;
+  const email = req.query.email;
+  const password = req.query.password;
+  //console.log(q);
+  console.log("Server side received: ", email, password);
+  var a_matches = await Users.findOne({
+    email: email
+  })
+  if(!a_matches) {
+    a_matches = null;
+  }
+  // const login = async (pw, hashedPw) => {
+  //   const result = await bcrypt.compare(pw, hashedPw);
+  //   if (result) {
+  //       console.log("LOGGED YOU IN! SUCCESSFUL MATCH!")
+  //   } else {
+  //       console.log("INCORRECT!")
+  //   }
+  // }
+  if(a_matches) {
+    bcrypt.compare(password, a_matches.hash)
+    .then((result) => res.send({response: result}))
+    .catch((failure) => res.send({response: failure}));
+  }
+  else 
+    res.send({response: false});
+  // if(a_matches) {
+  //   const result = login(password, a_matches.hash);
+  //   res.send({response: result});
+  // }
+  //res.send({response: req.query});
+})
+
 app.get('/search/sort', async function(req, res) {
   const {q} = req.query;
   console.log("Called /search/sort get")
   const a_matches = await Assignments.find({
-    title: {"$regex": q, "$options": "i"}
+    title: {$regex: /(q)+{1}/, "$options": "i"}
   });
   const matches = parseMatches(a_matches);
   
 })
 
 app.get('/search', async function(req, res){
-    const {q} = req.query;
-    console.log("Called app.get")
-    // if (q === '') {
-    //   res.send({ responses: null });
-    // }
+    const q = req.query.q;
+    console.log("Search string backend: ",q);
     const a_matches = await Assignments.find({
       title: {"$regex": q, "$options": "i"}
     });
