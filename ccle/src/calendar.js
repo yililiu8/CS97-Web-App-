@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './calendar.css';
+const axios = require('axios');
 
 function Square(text, date, events, assignments) {
     const lecture = "https://ucla.zoom.us/j/92610844994?pwd=a1dNMGNrakM3Q1JqZ284T1hsMUVadz09&"
@@ -26,61 +27,193 @@ function Square(text, date, events, assignments) {
               </div>
             </div>);
   }
+            
+    const cs97_assignments = [
+    {
+        title : "Emacs Editing and Shell Scripting",
+        course : "CS97", //had to change this from class to course
+        grade : 3.5,
+        deadline : "10/12/2020",
+        description : "Fake description"
+    },
+    {
+        title : "Python Scripting",
+        course : "CS97",
+        grade : 3.5,
+        deadline : "10/23/2020",
+        description : "Fake description"
+    },
+    {
+        title : "Chorus Lapilli",
+        course : "CS97",
+        grade : 5,
+        deadline : "11/01/2020",
+        description : "Fake description"
+    },
+    {
+        title : "Git Organization",
+        course : "CS97",
+        grade : 3.5,
+        deadline : "11/16/2020",
+        description : "Fake description"
+    },
+    {
+        title : "Low Level Programming in C",
+        course : "CS97",
+        grade : 4,
+        deadline : "11/23/2020",
+        description : "Fake description"
+    },
+    {
+        title : "Git Repository Organization",
+        course : "CS97",
+        grade : 4,
+        deadline : "12/07/2020",
+        description : "Fake description"
+    },
+    {
+        title : "Final Project Report",
+        course : "CS97",
+        grade : 3.5,
+        deadline : "12/08/2020",
+        description : "Fake description"
+    },
+    ]
   
   export class Day extends React.Component {
     constructor(props) {
-        super(props); 
+        super(props);
         var today = new Date();
-        var weekday = today.getDay(); 
+        var weekday = today.getDay();
         if (weekday === 0) {
             weekday = 1
-            today.setDate(today.getDate() + 1); 
+            today.setDate(today.getDate() + 1);
         }
         else if (weekday === 6) {
             weekday = 5
-            today.setDate(today.getDate() - 1); 
+            today.setDate(today.getDate() - 1);
         }
-        var date = getDates(weekday, today); 
+        var date = getDates(weekday, today);
+        
+        const cs97 = {
+            class_name : "CS97",
+            professor : "EGGERT, PAUL R.",
+            discussions : [
+            {
+                section : "1C",
+                ta : "SINGHAL, AKSHAY",
+                day : "f",
+                time : ["12:00am", "2:00pm"]
+            },
+            {
+                section : "1B",
+                ta : "XIE, HOWARD",
+                day : "f",
+                time : ["10:00am", "12:00am"]
+            }
+            ],
+            office_hours : [
+            {
+                person : "SINGHAL, AKSHAY",
+                day : "m",
+                time : ["9:30am", "11:30am"]
+            },
+            {
+                person : "XIE, HOWARD",
+                day : "t",
+                time : ["1:00pm", "2:00pm"]
+            },
+            {
+                person : "XIE, HOWARD",
+                day : "tr",
+                time : ["2:00pm", "3:00pm"]
+            },
+            {
+                person : "EGGERT, PAUL R.",
+                day : "w",
+                time : ["9:30am", "10:30am"]
+            },
+            {
+                person : "EGGERT, PAUL R.",
+                day : "m",
+                time : ["2:00pm", "3:00pm"]
+            }
+            ],
+            lecture_dates : [
+            {
+                day : "t",
+                time : ["4:00pm", "6:00pm"]
+            },
+            {
+                day : "tr",
+                time : ["4:00pm", "6:00pm"]
+            }
+            ]
+        }
+        //get all meetings
+        var m_meets = getMeetings(cs97)
+        
+        var m_assignments = {
+            0: [],
+            1: [],
+            2: [],
+            3: ["- Midterm 1"],
+            4: []
+        }
+        
+        for(var j = 0; j < cs97_assignments.length; j++) {
+            var assign = "- " + cs97_assignments[j].title + " Assignment Due"
+            for(var k = 0; k < date.length; k++) {
+                if (cs97_assignments[j].deadline === date[k]) {
+                    m_assignments[k].push(assign)
+                }
+            }
+        }
+        
+        
         this.state = {
             elements: {
                 "Assignments": true, 
                 "Meetings": true
             },
             currentDate: today, 
-            dates: date
+            dates: date,
+            meetings: m_meets,
+            assignments: m_assignments
         }; 
     }
       
     renderSquare(i) {
         //test data 
       const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-      const meetings = {
-          0: ["- Akshay's Office Hours @9:30am"],
-          1: ["- Howard's Office Hours @1pm", "- Lecture @4pm"], 
-          2: [], 
-          3: ["- Howard's Office Hours @2pm", "- Lecture @4pm"],
-          4: ["- Discussion @10am"]
-      }
-      const assignments = {
-          0: ["- Assignment 4 Due"],
-          1: [], 
-          2: [], 
-          3: ["- Midterm 1"],
-          4: []
-      }
+//      const meetings = {
+//          0: ["- Akshay's Office Hours @9:30am"],
+//          1: ["- Howard's Office Hours @1pm", "- Lecture @4pm"],
+//          2: [],
+//          3: ["- Howard's Office Hours @2pm", "- Lecture @4pm"],
+//          4: ["- Discussion @10am"]
+//      }
+//
+//      const assignments = {
+//          0: ["- Assignment 4 Due"],
+//          1: [],
+//          2: [],
+//          3: ["- Midterm 1"],
+//          4: []
+//      }
       /*
       var today = new Date();
       var weekday = today.getDay(); 
       var dates = getDates(weekday, today); */
       
       if(this.state.elements["Assignments"] === true && this.state.elements["Meetings"] === true) {
-          return Square(days[i], this.state.dates[i], meetings[i], assignments[i]);
+          return Square(days[i], this.state.dates[i], this.state.meetings[i], this.state.assignments[i]);
       }
       else if (this.state.elements["Assignments"] === true && this.state.elements["Meetings"] === false) {
-          return Square(days[i], this.state.dates[i], [], assignments[i]);
+          return Square(days[i], this.state.dates[i], [], this.state.assignments[i]);
       }
       else if (this.state.elements["Assignments"] === false && this.state.elements["Meetings"] === true) {
-          return Square(days[i], this.state.dates[i], meetings[i], []);
+          return Square(days[i], this.state.dates[i], this.state.meetings[i], []);
       }
       else {
           return Square(days[i], this.state.dates[i], [], []);
@@ -102,41 +235,53 @@ function Square(text, date, events, assignments) {
         this.setState({
             elements: changeElement, 
             currentDate: this.state.currentDate, 
-            dates: this.state.dates
+            dates: this.state.dates,
+            meetings: this.state.meetings,
+            assignments: this.state.assignments
         })
     }
       
     updateWeek(count)
     {
-        //somehow going to have to grab data from different weeks and update it here too
+        var m_assign = {
+            0: [],
+            1: [],
+            2: [],
+            3: ["- Midterm 1"],
+            4: []
+        }
+        var fin_date = this.state.dates
+        var fin_day = this.state.currentDate
         if(count === 1)
         {
-         var weekday_up = this.state.currentDate.getDay();  
-         var day_up = new Date(this.state.currentDate.getTime());
-         day_up.setDate(this.state.currentDate.getDate()+7);
-         var date_up = getDates(weekday_up, day_up); 
-            
-         this.setState({
-          elements: this.state.elements,
-          currentDate: day_up, 
-          dates: date_up
-        })
+            var weekday_up = this.state.currentDate.getDay();
+            fin_day = new Date(this.state.currentDate.getTime());
+            fin_day.setDate(this.state.currentDate.getDate()+7);
+            fin_date = getDates(weekday_up, fin_day);
         }
         else if (count === -1)
         {
-         var weekday = this.state.currentDate.getDay();  
-         var day = new Date(this.state.currentDate.getTime());
-         day.setDate(this.state.currentDate.getDate()-7);
-         var date_down = getDates(weekday, day); 
-            
-         this.setState({
-          elements: this.state.elements,
-          currentDate: day, 
-          dates: date_down
-        })   
+            var weekday = this.state.currentDate.getDay();
+            fin_day = new Date(this.state.currentDate.getTime());
+            fin_day.setDate(this.state.currentDate.getDate()-7);
+            fin_date = getDates(weekday, fin_day);
+        }
+        for(var j = 0; j < cs97_assignments.length; j++) {
+            var assign = "- " + cs97_assignments[j].title + " Assignment Due"
+            for(var k = 0; k < 5; k++) {
+                if (cs97_assignments[j].deadline === fin_date[k]) {
+                    m_assign[k].push(assign)
+                }
+            }
         }
         
-        
+        this.setState({
+         elements: this.state.elements,
+         currentDate: fin_day,
+         dates: fin_date,
+        meetings: this.state.meetings,
+        assignments: m_assign
+        })
     }
   
     render() {
@@ -195,4 +340,36 @@ function getDates(dayofWeek, today)
         dates.push(datesToString(day)); 
     }
     return dates; 
+}
+
+function getMeetings(course)
+{
+    const week_to_num = {"m": 0, "t":1, "w":2, "tr":3, "f":4}
+    var m_meetings = {
+        0: [],
+        1: [],
+        2: [],
+        3: [],
+        4: []
+    }
+    
+    //add lectures
+    for(var k = 0; k < course.lecture_dates.length; k++) {
+        var lec = "- Lecture @" + course.lecture_dates[k].time[0]
+        var week_count = week_to_num[course.lecture_dates[k].day]
+        m_meetings[week_count].push(lec);
+    }
+    //add discussions
+    for(var k = 0; k < course.discussions.length; k++) {
+        var discussion = "- " + course.discussions[k].section + " Discussion @" + course.discussions[k].time[0]
+        var week_count = week_to_num[course.discussions[k].day]
+        m_meetings[week_count].push(discussion);
+    }
+    //add office hours
+    for(var k = 0; k < course.office_hours.length; k++) {
+        var o_h = "- Office Hours with " + course.office_hours[k].person.toLowerCase() + " @" +  course.office_hours[k].time[0]
+        var week_count = week_to_num[course.office_hours[k].day]
+        m_meetings[week_count].push(o_h);
+    }
+    return m_meetings
 }
