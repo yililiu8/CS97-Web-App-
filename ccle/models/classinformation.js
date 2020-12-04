@@ -20,4 +20,5 @@ const classSchema = new mongoose.Schema({
     }]
 });
 
-module.exports = mongoose.model('classinformation', classSchema);
+module.exports = mongoose.model('classinformation1', classSchema);
+

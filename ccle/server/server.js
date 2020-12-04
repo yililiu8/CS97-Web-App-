@@ -189,6 +189,8 @@ app.get('/calendar', async function(req, res){
 
 //This creates array of upcoming discussions, lectures, OHs
 function parseMatchesCalendar(a_matches) {
+    return a_matches; 
+    /*
   var classes = []
   var discussions = []
   var lectures = []
@@ -196,8 +198,8 @@ function parseMatchesCalendar(a_matches) {
   for (let i of a_matches) {
     console.log(i);
     classes.push(i.class_name);
-    discussions.push(i.discussion);
-    lectures.push(i.lecture_date);
+    discussions.push(i.discussions);
+    lectures.push(i.lecture_dates);
     officeHours.push(i.office_hours);
   }
   // console.log(1);
@@ -209,7 +211,7 @@ function parseMatchesCalendar(a_matches) {
     discussions,
     lectures,
     officeHours
-  ];
+  ];*/
 }
 
 //get asssignments for the calendar

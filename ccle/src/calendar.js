@@ -80,7 +80,8 @@ function Square(text, date, events, assignments) {
         description : "Fake description"
     },
     ]*/
-            
+    
+            /*
     const cs97 = {
         class_name : "CS97",
         professor : "EGGERT, PAUL R.",
@@ -135,7 +136,7 @@ function Square(text, date, events, assignments) {
             time : ["4:00pm", "6:00pm"]
         }
         ]
-    }
+    }*/
   
   export class Day extends React.Component {
     constructor(props) {
@@ -154,7 +155,15 @@ function Square(text, date, events, assignments) {
         
         
         //get all meetings
-        var m_meets = getMeetings(cs97)
+        //var m_meets = getMeetings(cs97)
+        
+        var m_meets = {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: []
+        }
         
         var m_assignments = {
             0: [],
@@ -183,7 +192,8 @@ function Square(text, date, events, assignments) {
             meetings: m_meets,
             assignments: m_assignments,
             queried: false,
-            db_assignments: [[],[],[],[]]
+            db_assignments: [[],[],[],[]],
+            db_classinfo: []
         }; 
     }
       
@@ -271,15 +281,20 @@ function Square(text, date, events, assignments) {
     }
         
         find_assignments() {
-            console.log(this.state.db_assignments)
+            
             var db_assign = this.state.db_assignments
-            console.log(db_assign)
-            var m_assignments = this.state.assignments
+            var m_assignments = {
+                0: [],
+                1: [],
+                2: [],
+                3: ["- Midterm 1"],
+                4: []
+            }
             
             for(var j = 0; j < db_assign[0].length; j++) {
                 var assign = "- " + db_assign[0][j] + " " + db_assign[1][j] + " Due"
                 var assign_date = db_assign[2][j].substring(0, 10);
-                //console.log(assign_date)
+                
                 for(var k = 0; k < this.state.dates.length; k++) {
                     if (assign_date === this.state.dates[k]) {
                         m_assignments[k].push(assign)
@@ -305,10 +320,14 @@ function Square(text, date, events, assignments) {
                 console.log("accesed db for calendar")
                 const matches = data.response;
                 console.log("matching objects: " , matches);
+                let m_meet = getAllMeets(matches)
+                this.setState({
+                    meetings : m_meet,
+                    queried : true,
+                    db_classinfo : matches
+                })
             })
-            this.setState({
-                queried : true
-            })
+            
         }
     
         access_assign = () => {
@@ -325,9 +344,10 @@ function Square(text, date, events, assignments) {
                     temp.push(matches[3])
                     console.log(temp)
                      this.setState({
-                         queried: true,
+                         //queried: true,
                          db_assignments: temp
                      })
+                    
                 })
             }
 
@@ -336,8 +356,10 @@ function Square(text, date, events, assignments) {
       if (!this.state.queried){
         this.access_db();
         this.access_assign();
+          
       }
-    this.find_assignments()
+        this.find_assignments();
+        //console.log(this.state.db_classinfo[0])
         
       return (
         <div>
@@ -393,18 +415,27 @@ function getDates(dayofWeek, today)
     }
     return dates; 
 }
+            
+function getAllMeets(classes) {
+        var m_meetings = {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: []
+        }
+        for(var k = 0; k < classes.length; k++) {
+            m_meetings = getMeetings(classes[k], m_meetings);
+        }
+        return m_meetings
+}
 
-function getMeetings(course)
+function getMeetings(course, m_meetings)
 {
+    console.log(course)
     const week_to_num = {"m": 0, "t":1, "w":2, "tr":3, "f":4}
-    var m_meetings = {
-        0: [],
-        1: [],
-        2: [],
-        3: [],
-        4: []
-    }
     
+    console.log(course.class_name)
     //add lectures
     for(var k = 0; k < course.lecture_dates.length; k++) {
         var lec = "- " + course.class_name + " Lecture @" + course.lecture_dates[k].time[0]
@@ -413,13 +444,16 @@ function getMeetings(course)
     }
     //add discussions
     for(var k = 0; k < course.discussions.length; k++) {
-        var discussion = "- " + course.discussions[k].section + " Discussion @" + course.discussions[k].time[0]
+        var discussion = "- " + course.class_name + " " + course.discussions[k].section + " Discussion @" + course.discussions[k].time[0]
         var week_count = week_to_num[course.discussions[k].day]
         m_meetings[week_count].push(discussion);
     }
     //add office hours
     for(var k = 0; k < course.office_hours.length; k++) {
-        var o_h = "- Office Hours with " + course.office_hours[k].person.toLowerCase() + " @" +  course.office_hours[k].time[0]
+        //get last name only
+        let name = course.office_hours[k].person.split(',')
+        let captialize = name[0][0] + name[0].substring(1, name[0].length).toLowerCase()
+        var o_h = "- Office Hours with " + captialize + " @" +  course.office_hours[k].time[0]
         var week_count = week_to_num[course.office_hours[k].day]
         m_meetings[week_count].push(o_h);
     }
