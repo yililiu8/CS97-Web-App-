@@ -27,7 +27,8 @@ function Square(text, date, events, assignments) {
               </div>
             </div>);
   }
-            
+        
+    /*
     const cs97_assignments = [
     {
         title : "Emacs Editing and Shell Scripting",
@@ -78,7 +79,7 @@ function Square(text, date, events, assignments) {
         deadline : "2020-12-08",
         description : "Fake description"
     },
-    ]
+    ]*/
             
     const cs97 = {
         class_name : "CS97",
@@ -162,7 +163,7 @@ function Square(text, date, events, assignments) {
             3: ["- Midterm 1"],
             4: []
         }
-        
+        /*
         for(var j = 0; j < cs97_assignments.length; j++) {
             var assign = "- " + cs97.class_name + " " + cs97_assignments[j].title + " Due"
             for(var k = 0; k < date.length; k++) {
@@ -170,7 +171,7 @@ function Square(text, date, events, assignments) {
                     m_assignments[k].push(assign)
                 }
             }
-        }
+        }*/
         
         this.state = {
             elements: {
@@ -181,12 +182,12 @@ function Square(text, date, events, assignments) {
             dates: date,
             meetings: m_meets,
             assignments: m_assignments,
-            queried: false
+            queried: false,
+            db_assignments: [[],[],[],[]]
         }; 
     }
       
     renderSquare(i) {
-        //test data 
       const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
       
       if(this.state.elements["Assignments"] === true && this.state.elements["Meetings"] === true) {
@@ -249,6 +250,7 @@ function Square(text, date, events, assignments) {
             fin_day.setDate(this.state.currentDate.getDate()-7);
             fin_date = getDates(weekday, fin_day);
         }
+        /*
         for(var j = 0; j < cs97_assignments.length; j++) {
             var assign = "- " + cs97.class_name + " " + cs97_assignments[j].title + " Due"
             for(var k = 0; k < 5; k++) {
@@ -256,7 +258,7 @@ function Square(text, date, events, assignments) {
                     m_assign[k].push(assign)
                 }
             }
-        }
+        }*/
         
         this.setState({
          elements: this.state.elements,
@@ -265,7 +267,34 @@ function Square(text, date, events, assignments) {
         meetings: this.state.meetings,
         assignments: m_assign
         })
+        this.find_assignments()
     }
+        
+        find_assignments() {
+            console.log(this.state.db_assignments)
+            var db_assign = this.state.db_assignments
+            console.log(db_assign)
+            var m_assignments = this.state.assignments
+            
+            for(var j = 0; j < db_assign[0].length; j++) {
+                var assign = "- " + db_assign[0][j] + " " + db_assign[1][j] + " Due"
+                var assign_date = db_assign[2][j].substring(0, 10);
+                //console.log(assign_date)
+                for(var k = 0; k < this.state.dates.length; k++) {
+                    if (assign_date === this.state.dates[k]) {
+                        m_assignments[k].push(assign)
+                    }
+                }
+            }
+            this.state = ({
+                elements: this.state.elements,
+                currentDate: this.state.currentDate,
+                dates: this.state.dates,
+                meetings: this.state.meetings,
+                assignments: m_assignments,
+                db_assignments: this.state.db_assignments
+            })
+        }
 
     access_db = () => {
         fetch(`/calendar`)
@@ -289,14 +318,16 @@ function Square(text, date, events, assignments) {
                 })
                 .then(data => {
                     const matches = data.response; // array of all the assignments
-                    const num_assign = 4; // number of assignments
-                    const num_attr = 4; // number of attributes per assignment
-                    // this.setState({
-                    //     queried: true,
-                    //     assignments: [assign1,assign2,assign3,assign4]  
-                    //     // returns the four classes that appear at the top of the assignment list
-                    //     // not sorted yet for time dependency         
-                    // })
+                    let temp = [];
+                    temp.push(matches[0])
+                    temp.push(matches[1])
+                    temp.push(matches[2])
+                    temp.push(matches[3])
+                    console.log(temp)
+                     this.setState({
+                         queried: true,
+                         db_assignments: temp
+                     })
                 })
             }
 
@@ -306,6 +337,8 @@ function Square(text, date, events, assignments) {
         this.access_db();
         this.access_assign();
       }
+    this.find_assignments()
+        
       return (
         <div>
           <div className="title">
