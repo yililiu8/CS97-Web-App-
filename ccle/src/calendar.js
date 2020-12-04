@@ -180,7 +180,8 @@ function Square(text, date, events, assignments) {
             currentDate: today, 
             dates: date,
             meetings: m_meets,
-            assignments: m_assignments
+            assignments: m_assignments,
+            queried: false
         }; 
     }
       
@@ -265,10 +266,46 @@ function Square(text, date, events, assignments) {
         assignments: m_assign
         })
     }
-  
+
+    access_db = () => {
+        fetch(`/calendar`)
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                console.log("accesed db for calendar")
+                const matches = data.response;
+                console.log("matching objects: " , matches);
+            })
+            this.setState({
+                queried : true
+            })
+        }
+    
+        access_assign = () => {
+            fetch(`/summary`)
+                .then(res => {
+                    return res.json()
+                })
+                .then(data => {
+                    const matches = data.response; // array of all the assignments
+                    const num_assign = 4; // number of assignments
+                    const num_attr = 4; // number of attributes per assignment
+                    // this.setState({
+                    //     queried: true,
+                    //     assignments: [assign1,assign2,assign3,assign4]  
+                    //     // returns the four classes that appear at the top of the assignment list
+                    //     // not sorted yet for time dependency         
+                    // })
+                })
+            }
+
     render() {
       const title = 'Calendar';
-  
+      if (!this.state.queried){
+        this.access_db();
+        this.access_assign();
+      }
       return (
         <div>
           <div className="title">

@@ -3,7 +3,8 @@ const bcrypt = require('bcryptjs');
 const app = express();
 const mongoose = require('mongoose');
 const Users = require('../models/users');
-const Assignments = require('../models/assignments')
+const Assignments = require('../models/assignments');
+const ClassInformation = require('../models/classinformation');
 var mongoDB = 'mongodb+srv://jlam7:Jlam2001@cluster0.ldqdm.mongodb.net/total_class_information?retryWrites=true&w=majority';
 
 /////////DATES AND TIMES FOR DEADLINE COMPARISONS///////////
@@ -140,7 +141,7 @@ app.get('/description', async function(req, res){
     title: q
   });
   console.log(d_matches);
-  console.log("outputted matching object");
+  console.log("outputted description object");
   res.send( {response: d_matches} );
 })
 
@@ -148,7 +149,7 @@ app.get('/summary', async function(req, res){
   console.log("called app.get for assignment summary");
   const d_matches = await Assignments.find({});
   const matches = parseMatchesSummary(d_matches);
-  console.log("outputted matching object");
+  console.log("outputted summary object");
   res.send( {response: matches} );
 })
 
@@ -171,5 +172,43 @@ function parseMatchesSummary(a_matches) {
     titles,
     dueDates,
     summaries
+  ];
+}
+
+// used for accessing database for the calendar discussion / lectures / OHs
+app.get('/calendar', async function(req, res){
+  console.log("called app.get for assignment calendar");
+  const d_matches = await ClassInformation.find({
+  });
+  console.log("a");
+  console.log(Object.getOwnPropertyNames(d_matches));
+  console.log("b");
+  const matches = parseMatchesCalendar(d_matches);
+  console.log("outputted calendar object");
+  res.send( {response: matches} );
+})
+
+//This creates array of upcoming discussions, lectures, OHs
+function parseMatchesCalendar(a_matches) {
+  var classes = []
+  var discussions = []
+  var lectures = []
+  var officeHours = []
+  for (let i of a_matches) {
+    console.log(i);
+    classes.push(i.class_name);
+    discussions.push(i.discussion);
+    lectures.push(i.lecture_date);
+    officeHours.push(i.office_hours);
+  }
+  // console.log(1);
+  // console.log(discussions);
+  // console.log(lectures);
+  // console.log(officeHours);
+  return [
+    classes,
+    discussions,
+    lectures,
+    officeHours
   ];
 }

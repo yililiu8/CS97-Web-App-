@@ -18,7 +18,7 @@ export class UpcomingAssignments extends React.Component {
 
     // attempting to access database to return summaries
     display = () => {
-        fetch(`/summary?q=""`)
+        fetch(`/summary`)
             .then(res => {
                 return res.json()
             })
