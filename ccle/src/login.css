@@ -41,11 +41,18 @@
     border-radius: 10px; 
 }
 
+.login-field2 {
+    width: 600px;
+    height: 28px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
 .login-button {
-    margin-top: 40px; 
     width: 610px; 
     height: 35px; 
     /*background-color: #D6ecf3; */
     font: "Century Gothic", Futura, sans-serif;
-    border-radius: 10px; 
+    border-radius: 10px;
+    background-color: blue; 
 }

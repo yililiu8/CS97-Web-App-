@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import ReactDOM from 'react-dom';
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+//import Button from "react-bootstrap/Button";
+import Button from '@material-ui/core/Button';
 import './login.css';
 import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate} from "react-router-dom";
 
@@ -55,16 +56,14 @@ export function LoginScreen() {
             <br />
           <Form.Control
             type="password"
-            className="login-field"
+            className="login-field2"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Link to="/home">
-        <Button block size="lg" type="submit" className="login-button" disabled={!validateForm()}>
+        <Button variant="contained" className="login-button" component={Link} to="/home" disabled={!validateForm()}>
             Login
         </Button>
-        </Link>
       </Form>
         </div>
     </div>
