@@ -178,8 +178,7 @@ function parseMatchesSummary(a_matches) {
 // used for accessing database for the calendar discussion / lectures / OHs
 app.get('/calendar', async function(req, res){
   console.log("called app.get for assignment calendar");
-  const d_matches = await ClassInformation.find({
-  });
+  const d_matches = await ClassInformation.find({});
   console.log("a");
   console.log(Object.getOwnPropertyNames(d_matches));
   console.log("b");
@@ -210,5 +209,32 @@ function parseMatchesCalendar(a_matches) {
     discussions,
     lectures,
     officeHours
+  ];
+}
+
+//get asssignments for the calendar
+app.get('/cal', async function(req, res){
+  const d_matches = await Assignments.find({});
+  const matches = parseMatchesAssign(d_matches);
+  res.send( {response: matches} );
+})
+
+//This creates arrays of upcoming asssignments
+function parseMatchesAssign(a_matches) {
+  var classes = []
+  var titles = []
+  var dueDates = []
+  var summaries = []
+  for (let i of a_matches) {
+    classes.push(i.class);
+    titles.push(i.title);
+    dueDates.push(i.deadline);
+    summaries.push(i.description);
+  }
+  return [
+    classes,
+    titles,
+    dueDates,
+    summaries
   ];
 }

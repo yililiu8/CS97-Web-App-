@@ -11,22 +11,29 @@ var data1 = false;
 
 
 
-
 export function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [valid, setValid] = useState("");
 
     //this is where you make sure the username/password is correct and save
-  function validateForm() {
-    fetch(`/login?email=${email}&password=${password}`)
-    .then(res => {
-      return res.json()
-    })
-    .then(data => {
-      setValid(data.response);
-    })
-    return valid;
+  function validateForm(e) {
+      
+      fetch(`/login?email=${email}&password=${password}`)
+      .then(res => {
+        return res.json()
+      })
+      .then(data => {
+        setValid(data.response);
+          console.log(data.response);
+          console.log(valid)
+      })
+      
+      if(!valid) {
+          e.preventDefault();
+          alert('incorrect username or password');
+      }
+      
   }
 
   function handleSubmit(event) {
@@ -61,7 +68,7 @@ export function LoginScreen() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button variant="contained" className="login-button" component={Link} to="/home" disabled={!validateForm()}>
+          <Button id="myCheck" variant="contained" className="login-button" component={Link} to="/home" onClick={e => validateForm(e)}>
             Login
         </Button>
       </Form>
@@ -69,3 +76,5 @@ export function LoginScreen() {
     </div>
   );
 }
+
+/*disabled={!validateForm()}*/

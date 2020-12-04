@@ -312,7 +312,7 @@ function Square(text, date, events, assignments) {
         }
     
         access_assign = () => {
-            fetch(`/summary`)
+            fetch(`/cal`)
                 .then(res => {
                     return res.json()
                 })

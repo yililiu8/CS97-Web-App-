@@ -7,7 +7,7 @@ import { LoginScreen } from './login.js'
 import { UpcomingAssignments, Test } from './assignments.js'
 import { Events } from './events.js'
 
-import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate} from "react-router-dom"
+import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate, useLocation} from "react-router-dom"
 
 //const express = require('express');
 // const app = express();
@@ -20,8 +20,9 @@ import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, u
 //   console.log("LISTENING!");
 // })
 
+
 class Textbox extends React.Component {
-    
+
     render (){
     return (
         <Router>
