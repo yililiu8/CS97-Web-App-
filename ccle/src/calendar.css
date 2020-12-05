@@ -33,7 +33,7 @@ li {
   text-align: left;
   width: 160px;
     font-weight: 600; 
-    
+    overflow: auto; 
 }
 
 td {
@@ -121,7 +121,8 @@ table {
   margin-right: 20px;  
   color: floralwhite; 
   border-radius: 10px;
-  background-color: white;
+  /*background-color: white;*/
+  background: #FFFFFF; 
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -137,8 +138,8 @@ table {
 }
 
 .buttons:focus {
-    background-color: #588BAE; 
-    color: #fff; 
+    /*background-color: #588BAE; */
+    /*color: #fff;*/
 }
 
 .buttons span {
