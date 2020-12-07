@@ -14,5 +14,5 @@ This will install all the required dependencies.
 
 - `cd ccle/server`
 - `node server.js`
-- Open a new terminal tab and make sure you're in the ccle directory: `npm start`
+- Without closing the current terminal tab, open a new terminal tab and make sure you're in the ccle directory: `npm start`
 - This will run the server and client on two separate terminals
