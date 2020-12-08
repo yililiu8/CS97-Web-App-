@@ -23,7 +23,17 @@ const assignSchema = new mongoose.Schema({
     grade: Number,
     description: String,
     information: String,
-    deadline: Date
+    deadline: Date,
+    discussion: [{
+        question: {
+            text: String,
+            date: String
+        },
+        responses: [{
+            text: String,
+            date: String
+        }]
+    }]
 })
 
 //const Assignments = mongoose.model('assignments',assignSchema);

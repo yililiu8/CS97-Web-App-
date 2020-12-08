@@ -144,48 +144,63 @@ export function Test({name}){
 }
 
 export class Description extends React.Component {
-constructor(props) {
-    super(props);
-    this.state = {
-        title: this.props.name,
-        description : "", // not sure if this is necessary, since it was alsready shown on home page
-        class: "",
-        deadline: "",
-        information: "" // complete assignment specification
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: this.props.name,
+            description : "", // not sure if this is necessary, since it was alsready shown on home page
+            class: "",
+            deadline: "",
+            information: "", // complete assignment specification
+            discussion: []
+        }
     }
-}
-display = () => {
-    fetch(`/description?q=${this.state.title}`)
-        .then(res => {
-            return res.json()
-        })
-        .then(data => {
-            const matches = data.response[0];
-            console.log("matching objects: " , matches);
-            this.setState({
-                description: matches.description,
-                class: matches.class,
-                information: matches.information,
-                deadline: matches.deadline
+    display = () => {
+        fetch(`/description?q=${this.state.title}`)
+            .then(res => {
+                return res.json()
             })
-        })
-    }
-render() {
-    if (!this.state.description)
-        this.display();
-    return (
-        <div className="my-assignment">
-            <ul>
-                <p className="assignment-name">{this.state.class + " - " +this.state.title}</p>
+            .then(data => {
+                const matches = data.response[0];
+                console.log("matching objects: " , matches);
+                this.setState({
+                    description: matches.description,
+                    class: matches.class,
+                    information: matches.information,
+                    deadline: matches.deadline,
+                    discussion: matches.discussion
+                })
+            })
+        }
+    render() {
+        if (!this.state.description)
+            this.display();
+            var unparsedDiscussion = discussionExtract(this.state.discussion);
+        return (
+            <div className="my-assignment">
                 <ul>
-                    <li>{"Due Date : " + this.state.deadline.slice(0,10)}</li>
-                    <li>{"Assignment Specification"}</li>
-                    <li>{this.state.information}</li>
+                    <p className="assignment-name">{this.state.class + " - " +this.state.title}</p>
+                    <ul>
+                        <li>{"Due Date : " + this.state.deadline.slice(0,10)}</li>
+                        <li>{"Assignment Specification"}</li>
+                        <li>{this.state.information}</li>
+                    </ul>
                 </ul>
-            </ul>
-        </div>
-        );
-}     
-}
+            </div>
+            );
+    }     
+} 
 
+function discussionExtract(discussion) {
+    var questions = []
+    var responses = []
+    for (var i=0; i < discussion.length; i++) {
+        questions.push(discussion[i].question)
+        responses.push(discussion[i].responses)
+    }
+    console.log("extracting questions and responses:")
+    console.log(questions)
+    console.log(responses)
+    return [questions, responses]
+}
 
