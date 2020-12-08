@@ -72,7 +72,7 @@ export class SearchBar extends React.Component {
                             <select onChange={this.handleClick} placeholder="Sort by">
                                 <option>Sort by:</option>
                                 <option>Grade Weightage</option>
-                                <option>Alphabetical Order</option>
+                                {/* <option>Alphabetical Order</option> */}
                                 <option>Due Date</option>
                             </select>
                             <ul id="special">
