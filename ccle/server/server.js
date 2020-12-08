@@ -11,15 +11,20 @@ var mongoDB = 'mongodb+srv://jlam7:Jlam2001@cluster0.ldqdm.mongodb.net/total_cla
 //our current date
 //we turn the dates into string to make them easier to compare
 //" '0'+... .slice(-2) " accounts for leading 0s.
-var currentdate = new Date();
-var date = ('0' + currentdate.getDate()).slice(-2);
-var month = ('0'+(currentdate.getMonth()+1)).slice(-2);
-var year = currentdate.getFullYear();
-var hour = ('0' + currentdate.getHours()).slice(-2);
-var minutes = ('0' + currentdate.getMinutes()).slice(-2);
-var seconds = ('0' + currentdate.getSeconds()).slice(-2);
-var date_string=year+"-"+month+"-"+date+"T"+hour+":"+minutes+":"+seconds+".000+00:00";
-console.log("The current time is: "+ date_string)
+function getCurrentDate() {
+  var currentdate = new Date();
+  var date = ('0' + currentdate.getDate()).slice(-2);
+  var month = ('0'+(currentdate.getMonth()+1)).slice(-2);
+  var year = currentdate.getFullYear();
+  var hour = ('0' + currentdate.getHours()).slice(-2);
+  var minutes = ('0' + currentdate.getMinutes()).slice(-2);
+  var seconds = ('0' + currentdate.getSeconds()).slice(-2);
+  var date_string=year+"-"+month+"-"+date+"T"+hour+":"+minutes+":"+seconds+".000+00:00";
+  console.log("The current time is: "+ date_string)
+  return date_string
+}
+
+date_string = getCurrentDate();
 
 //function to compare deadlines
 function compareDate(deadline) {
@@ -152,6 +157,13 @@ app.get('/summary', async function(req, res){
   console.log("outputted summary object");
   res.send( {response: matches} );
 })
+
+
+//app.post('/updateGroup/:id', async function(req, res){
+//  const {q} = req.query;
+//  console.log("updating the assignment discussion");
+//
+//})
 
 //This creates arrays of upcoming asssignments
 function parseMatchesSummary(a_matches) {
