@@ -26,14 +26,6 @@ class Textbox extends React.Component {
     render (){
     return (
         <Router>
-	       <div className= "header">
-	           <div className= "logo">
-                    <Link to="/home">NEW CCLE</Link> 
-                </div>
-                <div className="calendar-nav">
-                    <Link to="/login">Log Out</Link> 
-                </div> 
-            </div>
             <Switch> 
                 <Route exact path="/"
                 render={() => {
@@ -46,6 +38,14 @@ class Textbox extends React.Component {
                     <LoginScreen />  
                 </Route>
                 <Route exact path="/home">
+                    <div className= "header">
+                        <div className= "logo">
+                            <Link to="/home">NEW CCLE</Link>
+                        </div>
+                        <div className="calendar-nav">
+                            <Link to="/login">Log Out</Link>
+                        </div>
+                    </div>
                     <div className='row1'>
                         <UpcomingAssignments/>
                         <Calendar />
