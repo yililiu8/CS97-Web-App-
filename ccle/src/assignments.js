@@ -189,7 +189,7 @@ export class Description extends React.Component {
             </div>
             );
     }     
-} 
+}
 
 function discussionExtract(discussion) {
     var questions = []
