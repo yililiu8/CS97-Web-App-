@@ -16,3 +16,4 @@ This will install all the required dependencies.
 - `node server.js`
 - Without closing the current terminal tab, open a new terminal tab and make sure you're in the ccle directory: `npm start`
 - This will run the server and client on two separate terminals
+- If the terminal prompts to run on a different port number, type 'y' or 'yes'

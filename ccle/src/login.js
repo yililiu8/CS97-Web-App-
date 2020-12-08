@@ -18,27 +18,56 @@ export class LoginScreen extends React.Component {
             valid: false
         };
     }
+
+    componentDidUpdate() {
+      // this.setState({
+      //   password: e.target.value
+      // })
+      // fetch(`/login?email=${this.state.email}&password=${this.state.password}`)
+      //   .then(res => {
+      //     return res.json()
+      //   })
+      //   .then(data => {
+      //       this.setState({
+      //           valid: data.response
+      //       })
+      //     //setValid(data.response);
+      //       //console.log(data.response);
+      //       console.log(this.state.valid)
+      //   })
+    }
     
     validateForm(e) {
-        
-        fetch(`/login?email=${this.state.email}&password=${this.state.password}`)
-        .then(res => {
-          return res.json()
-        })
-        .then(data => {
-            this.state = {
-                valid: data.response
-            }
-          //setValid(data.response);
-            console.log(data.response);
-            console.log(this.state.valid)
-        })
         
         if(!this.state.valid) {
             e.preventDefault();
             alert('incorrect username or password');
         }
         
+    }
+
+    handleChangePass = (e) => {
+      this.setState({
+        password: e.target.value
+      })
+      fetch(`/login?email=${this.state.email}&password=${e.target.value}`)
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+            this.setState({
+                valid: data.response
+            })
+          //setValid(data.response);
+            //console.log(data.response);
+            console.log(this.state.valid)
+        })
+    }
+
+    handleChangeEmail = (e) => {
+      this.setState({
+        email: e.target.value
+      })
     }
     
     handleSubmit(event) {
@@ -70,7 +99,8 @@ export class LoginScreen extends React.Component {
                        type="email"
                        className="login-field"
                        value={this.state.email}
-               onChange={(e) => this.state={email: e.target.value }}
+               //onChange={(e) => this.state={email: e.target.value }}
+                       onChange ={this.handleChangeEmail}
                      />
                    </Form.Group>
                    <Form.Group size="lg" controlId="password">
@@ -80,7 +110,8 @@ export class LoginScreen extends React.Component {
                        type="password"
                        className="login-field2"
                        value={this.state.password}
-               onChange={(e) => this.state={password: e.target.value }}
+               //onChange={(e) => this.state={password: e.target.value }}
+                       onChange={this.handleChangePass}
                      />
                    </Form.Group>
                      <Button id="myCheck" variant="contained" className="login-button" component={Link} to="/home" onClick={e => this.validateForm(e)}>

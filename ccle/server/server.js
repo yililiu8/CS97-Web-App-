@@ -60,10 +60,20 @@ function parseMatches(a_matches, sort) {
   console.log("PARSEMATCHES received: ", sort);
   var matches =[]
   var ids = []
-  if(sort === "Sort by:") {
+  if(sort === "Due Date") {
+    a_matches.sort(function(a,b) {
+      if (a.deadline > b.deadline) {
+        return 1;
+      }
+      else if (a.deadline < b.deadline) {
+        return -1;
+      }
+      else {
+        return 0;
+      }
+    });
     for (let i of a_matches) {
       matches.push(i.title);
-      ids.push(i._id);
     }
   }
   else if (sort === "Grade Weightage") {
@@ -80,6 +90,12 @@ function parseMatches(a_matches, sort) {
     });
     for(let i of a_matches) {
       matches.push(i.title);
+    }
+  }
+  else {
+    for (let i of a_matches) {
+      matches.push(i.title);
+      ids.push(i._id);
     }
   }
   return matches;
