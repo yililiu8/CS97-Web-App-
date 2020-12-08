@@ -177,6 +177,15 @@ export class Description extends React.Component {
             this.display();
             var unparsedDiscussion = discussionExtract(this.state.discussion);
         return (
+            <div>
+                <div className= "header">
+                    <div className= "logo">
+                        <Link to="/home">NEW CCLE</Link>
+                    </div>
+                    <div className="calendar-nav">
+                        <Link to="/login">Log Out</Link>
+                    </div>
+                </div>
             <div className="my-assignment">
                 <ul>
                     <p className="assignment-name">{this.state.class + " - " +this.state.title}</p>
@@ -186,6 +195,7 @@ export class Description extends React.Component {
                         <li>{this.state.information}</li>
                     </ul>
                 </ul>
+            </div>
             </div>
             );
     }     

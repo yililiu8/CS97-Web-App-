@@ -9,7 +9,6 @@ import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, u
 
 var data1 = false;
 
-
 export class LoginScreen extends React.Component {
     constructor(props){
         super(props);
@@ -46,8 +45,17 @@ export class LoginScreen extends React.Component {
       event.preventDefault();
     }
     
+    
+    
     render() {
+        let email = this.state.email
         return(
+            <div>
+           <div className= "header">
+               <div className= "logo">
+                    NEW CCLE
+                </div>
+            </div>
                <div className="login-box">
                  <h3 className="Login"> Student Login </h3>
                  <br />
@@ -80,6 +88,7 @@ export class LoginScreen extends React.Component {
                    </Button>
                  </Form>
                    </div>
+               </div>
                </div>
         );
     }
