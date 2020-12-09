@@ -140,8 +140,8 @@ function Square(text, date, events, assignments) {
                 "Lectures" : true,
             }
             for(let e in this.state.elements) {
-                document.getElementById(e).style.background = "rgb(255,255,255)";
-                document.getElementById(e).style.color = "rgb(88,139,174)";
+                document.getElementById(e).style.background = "rgb(69,182,254)";
+                document.getElementById(e).style.color = "rgb(255,255,255)";
             }
             
             isFull = true
@@ -150,12 +150,12 @@ function Square(text, date, events, assignments) {
             changeElement[element] = !this.state.elements[element]
             
             var background = document.getElementById(element).style.backgroundColor;
-            if (background == "rgb(88, 139, 174)") {
-                    document.getElementById(element).style.background = "rgb(255,255,255)";
-                document.getElementById(element).style.color = "rgb(88,139,174)";
-            } else {
-                    document.getElementById(element).style.background = "rgb(88,139,174)";
+            if (background == "rgb(255, 255, 255)") {
+                    document.getElementById(element).style.background = "rgb(69,182,254)";
                 document.getElementById(element).style.color = "rgb(255,255,255)";
+            } else {
+                    document.getElementById(element).style.background = "rgb(255,255,255)";
+                document.getElementById(element).style.color = "rgb(69,182,254)";
             }
 
         }
@@ -288,6 +288,7 @@ function Square(text, date, events, assignments) {
       }
         this.find_assignments();
         
+        
       return (
         <div>
           <div className="title">
@@ -308,7 +309,7 @@ function Square(text, date, events, assignments) {
               <button id="Lectures" className="buttons" onClick={() => this.filter("Lectures")}><span>Lectures</span></button>
               <button id="Discussions" className="buttons" onClick={() => this.filter("Discussions")}><span>Discussions</span></button>
               <button id="Office Hours" className="buttons" onClick={() => this.filter("Office Hours")}><span>Office Hours</span></button>
-              <button id="All" className="buttons" onClick={() => this.filter("All")}><span>Show All</span></button>
+              <button id="All" className="all-button" onClick={() => this.filter("All")}><span>Show All</span></button>
           </div>
       </div>
       );
