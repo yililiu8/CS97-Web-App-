@@ -301,21 +301,12 @@ export class Description extends React.Component {
     
     //this is the layout for every specific question
     Question(i, title, replies) {
+        let num_replies = replies.length
         return (<div className="questions">
                 <p className="form-question">{"• " +title}</p>
                 <ul>
-                    <li className="form-reply">{replies[0]}</li>
-                    <li className="form-reply">{replies[1]}</li>
-                    <li className="form-reply">{replies[2]}</li>
-                    <li className="form-reply">{replies[3]}</li>
-                    <li className="form-reply">{replies[4]}</li>
-                    <li className="form-reply">{replies[5]}</li>
-                    <li className="form-reply">{replies[6]}</li>
-                    <li className="form-reply">{replies[7]}</li>
-                    <li className="form-reply">{replies[8]}</li>
-                    <li className="form-reply">{replies[9]}</li>
-                    <li className="form-reply">{replies[10]}</li>
-                    <li className="form-reply">{replies[11]}</li>
+                    {[...Array(num_replies)].map((x, k) =>
+                        <li className="form-reply"> {replies[k]} </li>)}
                     <li>
                         <Form onSubmit={this.handleFormSubmit}>
                         <Form.Group size="lg" controlId="submit">
