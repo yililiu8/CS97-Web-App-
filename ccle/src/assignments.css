@@ -160,10 +160,11 @@
 }
 
 .form-reply {
-    margin-top: -10px;
+    margin-top: 13px;
     font-size: 14px;
     margin-left: 17px;
     color: #555555;
+    line-height: 1.5;
 }
 
 .form-question {
