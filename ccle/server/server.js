@@ -44,8 +44,7 @@ function compareDate(deadline) {
 }
 /////////DATES AND TIMES FOR DEADLINE COMPARISONS///////////
 
-
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoDB, { useNewUrlParser: false, useUnifiedTopology: true })
     .then(() => {
         console.log("Connection to database established.")
     })
