@@ -156,12 +156,16 @@ const disc = [{
                 {text: "reply2", date: "replydate2"}]
     },
     {
-        question: {text: "question2", date: "date2"},
+        question: {text: "question3", date: "date2"},
         responses: [{text: "reply1", date: "replydate1"},
                     {text: "reply2", date: "replydate2"},
                     {text: "reply3", date: "replydate3"},
                     {text: "reply4", date: "replydate4"}]
-        }
+    },
+    {
+        question: {text: "question4", date: "date2"},
+        responses: []
+    },
 ]
 
 
@@ -217,11 +221,11 @@ export class Description extends React.Component {
             let render_question = this.state.discussion[i]
             let title = render_question.question.text + ", posted on: " + render_question.question.date
             let replies = []
-            //let reply_dates = []
+                //let reply_dates = []
             for(var k = 0; k < render_question.responses.length; k++) {
                 let comment = render_question.responses[k].text + " - " + render_question.responses[k].date
                 replies.push(comment)
-                //reply_dates.push(render_question.responses[k].date)
+                    //reply_dates.push(render_question.responses[k].date)
             }
             return this.Question(i, title, replies);
         }
@@ -247,6 +251,7 @@ export class Description extends React.Component {
     }
     
     render() {
+        let num_questions = this.state.discussion.length
         if (!this.state.description)
             this.display();
             var unparsedDiscussion = discussionExtract(this.state.discussion);
@@ -285,11 +290,9 @@ export class Description extends React.Component {
                     </Form>
                 </div>
                 <div className="post-label">Top Posts</div>
-                {this.renderQuestion(0)}
-                {this.renderQuestion(1)}
-                {this.renderQuestion(2)}
-                {this.renderQuestion(3)}
-                {this.renderQuestion(4)}
+                    {[...Array(num_questions)].map((x, i) =>
+                    <div> {this.renderQuestion(i)} </div>
+                )}
                 </ul>
             </div>
             </div>
