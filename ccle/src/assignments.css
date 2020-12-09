@@ -51,7 +51,7 @@
   /*border: 2px solid #000000; */
   float: left;
   font-weight: lighter;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 34px;
   min-height: 525px;
   margin-top: 30px;
@@ -70,8 +70,100 @@
     padding-top: 5px; 
     color: #fff; 
     margin-top: -20px;
+    font-size: 20px;
 }
 .photo{
   height: 100px;
   width: 100px; 
 }
+
+.assign-info {
+    font-size: 14px;
+    margin-left: 20px; 
+}
+
+.question-form {
+    width: 600px;
+    height: 28px;
+    border-radius: 20px;
+    padding-left: 20px;
+    font-size: 15px; 
+}
+
+.submit-button {
+  color: floralwhite;
+  border-radius: 10px;
+  /*background-color: white;*/
+  background: #FFFFFF;
+  border: none;
+  color: #45b6fe;
+  text-align: center;
+  /*color: #588BAE; */
+  padding: 5px;
+  padding-right: 20px;
+  padding-left: 20px;
+  transition: all 0.5s;
+  cursor: pointer;
+  /*margin: 5px;*/
+  font: 13px "Century Gothic", Futura, sans-serif;
+  border: 2px solid #45b6fe;
+  margin-left: 10px;
+}
+
+.questions {
+    margin-top: 30px;
+    min-height: 100px;
+    border: 2px solid #45b6fe;
+    font-size: 12px;
+    margin-right: 20px;
+    border-radius: 20px; 
+}
+
+.specific-question-form {
+    width: 300px;
+    height: 20px;
+    border-radius: 20px;
+    padding-left: 20px;
+    font-size: 13px;
+    margin-left: 20px;
+}
+
+.specific-submit-button {
+    color: floralwhite;
+    border-radius: 10px;
+    /*background-color: white;*/
+    background: #FFFFFF;
+    border: none;
+    color: #45b6fe;
+    text-align: center;
+    /*color: #588BAE; */
+    padding: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
+    transition: all 0.5s;
+    cursor: pointer;
+    /*margin: 5px;*/
+    font: 10px "Century Gothic", Futura, sans-serif;
+    border: 2px solid #45b6fe;
+    margin-left: 10px;
+    margin-top: 20px; 
+}
+
+.form-reply {
+    margin-top: -10px;
+    font-size: 14px;
+    margin-left: 17px;
+    color: #555555;
+}
+
+.form-question {
+    font-size: 17px;
+    margin-left: 10px;
+    
+}
+
+.post-label {
+    margin-top: 20px;
+    margin-bottom: -20px; 
+}
+

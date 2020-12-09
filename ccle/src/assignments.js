@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Form from "react-bootstrap/Form";
 import './assignments.css';
 import Logo from "./books.png"
 
@@ -143,6 +144,27 @@ export function Test({name}){
     ); 
 }
 
+const disc = [{
+    question: {text: "question1", date: "date1"},
+    responses: [{text: "reply1", date: "replydate1"},
+                {text: "reply2", date: "replydate2"},
+                {text: "reply3", date: "replydate3"}]
+    },
+    {
+    question: {text: "question2", date: "date2"},
+    responses: [{text: "reply1", date: "replydate1"},
+                {text: "reply2", date: "replydate2"}]
+    },
+    {
+        question: {text: "question2", date: "date2"},
+        responses: [{text: "reply1", date: "replydate1"},
+                    {text: "reply2", date: "replydate2"},
+                    {text: "reply3", date: "replydate3"},
+                    {text: "reply4", date: "replydate4"}]
+        }
+]
+
+
 export class Description extends React.Component {
     constructor(props) {
         super(props);
@@ -152,8 +174,11 @@ export class Description extends React.Component {
             class: "",
             deadline: "",
             information: "", // complete assignment specification
-            discussion: []
+            discussion: disc,
+            submit_question: "", //question being sumbited
+            submit_reply: ["", "", "", "", ""], //reply being submitted
         }
+        
     }
     display = () => {
         fetch(`/description?q=${this.state.title}`)
@@ -168,10 +193,59 @@ export class Description extends React.Component {
                     class: matches.class,
                     information: matches.information,
                     deadline: matches.deadline,
-                    discussion: matches.discussion
+                    //discussion: matches.discussion
                 })
             })
         }
+    
+    handleChangeForm = (e) => {
+      this.setState({
+        submit_question: e.target.value
+      })
+    }
+    
+    handleChangeReply(e, i)  {
+        var rep = this.state.submit_reply
+        rep[i] = e.target.value
+      this.setState({
+        submit_reply: rep
+      })
+    }
+    
+    renderQuestion(i){
+        if(this.state.discussion.length > i) {
+            let render_question = this.state.discussion[i]
+            let title = render_question.question.text + ", posted on: " + render_question.question.date
+            let replies = []
+            //let reply_dates = []
+            for(var k = 0; k < render_question.responses.length; k++) {
+                let comment = render_question.responses[k].text + " - " + render_question.responses[k].date
+                replies.push(comment)
+                //reply_dates.push(render_question.responses[k].date)
+            }
+            return this.Question(i, title, replies);
+        }
+        
+    }
+    
+    //this is where you would upload the question to the db/update it to the page for a reply (you can access variables here as shown below)
+    //each index corresponds to the index of the question in the array
+    validateSubmitSpecific(e, i) {
+        let message = "congrats on successfully replying to a question at index " + i + ". The reply was: " + this.state.submit_reply[i]
+        alert(message);
+    }
+    
+    //this is where you would upload the question to the db/update it to the page
+    validateSubmit(e) {
+        let ques = "congrats on successfully sumbitting your question. The submission was: " + this.state.submit_question
+        alert(ques);
+    }
+    
+    
+    handleFormSubmit(event) {
+      event.preventDefault();
+    }
+    
     render() {
         if (!this.state.description)
             this.display();
@@ -192,13 +266,72 @@ export class Description extends React.Component {
                     <ul>
                         <li>{"Due Date : " + this.state.deadline.slice(0,10)}</li>
                         <li>{"Assignment Specification"}</li>
-                        <li>{this.state.information}</li>
+                        <li className="assign-info">{this.state.information}</li>
                     </ul>
+                    <div>
+                    <Form onSubmit={this.handleFormSubmit}>
+                        <Form.Group size="lg" controlId="submit">
+                      <br />
+                    <Form.Control
+                      autoFocusls
+                     type="text"
+                        placeholder="Submit a question"
+                      className="question-form"
+                      value={this.state.submit_question}
+                      onChange ={this.handleChangeForm}
+                    />
+                <button className="submit-button" onClick={e => this.validateSubmit(e)}> Submit</button>
+                  </Form.Group>
+                    </Form>
+                </div>
+                <div className="post-label">Top Posts</div>
+                {this.renderQuestion(0)}
+                {this.renderQuestion(1)}
+                {this.renderQuestion(2)}
+                {this.renderQuestion(3)}
+                {this.renderQuestion(4)}
                 </ul>
             </div>
             </div>
             );
-    }     
+    }
+    
+    //this is the layout for every specific question
+    Question(i, title, replies) {
+        return (<div className="questions">
+                <p className="form-question">{"• " +title}</p>
+                <ul>
+                    <li className="form-reply">{replies[0]}</li>
+                    <li className="form-reply">{replies[1]}</li>
+                    <li className="form-reply">{replies[2]}</li>
+                    <li className="form-reply">{replies[3]}</li>
+                    <li className="form-reply">{replies[4]}</li>
+                    <li className="form-reply">{replies[5]}</li>
+                    <li className="form-reply">{replies[6]}</li>
+                    <li className="form-reply">{replies[7]}</li>
+                    <li className="form-reply">{replies[8]}</li>
+                    <li className="form-reply">{replies[9]}</li>
+                    <li className="form-reply">{replies[10]}</li>
+                    <li className="form-reply">{replies[11]}</li>
+                    <li>
+                        <Form onSubmit={this.handleFormSubmit}>
+                        <Form.Group size="lg" controlId="submit">
+                        <Form.Control
+                            autoFocusls
+                            type="text"
+                            placeholder="Submit a reply"
+                            className="specific-question-form"
+                            value={this.state.submit_reply[i]}
+                            onChange ={e => this.handleChangeReply(e, i)}
+                            />
+                        <button className="specific-submit-button" onClick={e =>         this.validateSubmitSpecific(e, i)}> Submit</button>
+                        </Form.Group>
+                    </Form>
+                    </li>
+                </ul>
+                </div>);
+    }
+
 }
 
 function discussionExtract(discussion) {
@@ -213,4 +346,3 @@ function discussionExtract(discussion) {
     console.log(responses)
     return [questions, responses]
 }
-
