@@ -2,7 +2,7 @@ import React from 'react';
 //import ReactDOM from 'react-dom';
 import './searchBar.css';
 import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate, useParams, useLocation} from "react-router-dom"; 
-import Logo from "./design.jpg"
+//import Logo from "./design.jpg"
 
 export class SearchBar extends React.Component {
     constructor(props) {

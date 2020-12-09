@@ -190,12 +190,20 @@ export class Description extends React.Component {
             .then(data => {
                 const matches = data.response[0];
                 console.log("matching objects: " , matches);
+                var textField_replies = []
+                
+                //this is needed in order to the text fields to work properly
+                for(var k = 0; k < matches.discussion.length; k++){
+                    textField_replies.push("")
+                }
+                
                 this.setState({
                     description: matches.description,
                     class: matches.class,
                     information: matches.information,
                     deadline: matches.deadline,
-                    //discussion: matches.discussion
+                    //discussion: matches.discussion,
+                    //submit_reply: textField_replies //uncomment this later
                 })
             })
         }
@@ -233,14 +241,54 @@ export class Description extends React.Component {
     //this is where you would upload the question to the db/update it to the page for a reply (you can access variables here as shown below)
     //each index corresponds to the index of the question in the array
     validateSubmitSpecific(e, i) {
-        let message = "congrats on successfully replying to a question at index " + i + ". The reply was: " + this.state.submit_reply[i]
+        //the alert isn't necessarily need, just here for you to check it actually submits
+        let message = "congrats on successfully replying to a question"
         alert(message);
+        
+        
+        var today = new Date();
+        let m_disc = this.state.discussion
+        m_disc[i].responses.push({text: this.state.submit_reply[i], date: dateToString(today)})
+        
+        //empty text field
+        var reply_string_vals = this.state.submit_reply
+        reply_string_vals[i] = ""
+        
+        this.setState({
+          discussion: m_disc,
+          submit_reply: reply_string_vals
+        })
+        
+        //you might need to use this below if you use the database but not 100% sure
+        //window.location.reload()
     }
     
     //this is where you would upload the question to the db/update it to the page
     validateSubmit(e) {
-        let ques = "congrats on successfully sumbitting your question. The submission was: " + this.state.submit_question
+        //the alert isn't necessarily need, just here for you to check it actually submits
+        let ques = "congrats on successfully sumbitting your question."
         alert(ques);
+        //you would need to add it to the database rather than an array but this is roughly how to submit a question:
+        var today = new Date();
+        let m_disc = this.state.discussion
+        var reply_strings = this.state.submit_reply
+        reply_strings.push("")
+        m_disc.push({
+                question: {text: this.state.submit_question, date: dateToString(today)},
+                responses: [],
+                submit_reply: reply_strings
+        })
+        
+        //empty text field
+        var question_string_val = this.state.submit_question
+        question_string_val = ""
+        
+        this.setState({
+          discussion: m_disc,
+            submit_question: question_string_val
+        })
+        //you might need to use this below if you use the database but not 100% sure
+        //window.location.reload()
     }
     
     
@@ -337,4 +385,16 @@ function discussionExtract(discussion) {
     console.log(questions)
     console.log(responses)
     return [questions, responses]
+}
+                                                 
+//converts variables of date type to string
+function dateToString(date)
+{
+    var datetime = date.getDate() + "/"
+                    + (date.getMonth()+1)  + "/"
+                    + date.getFullYear() + " @ "
+                    + date.getHours() + ":"
+                    + date.getMinutes() + ":"
+                    + date.getSeconds();
+    return datetime;
 }
