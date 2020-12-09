@@ -156,14 +156,14 @@ const disc = [{
                 {text: "reply2", date: "replydate2"}]
     },
     {
-        question: {text: "question3", date: "date2"},
+        question: {text: "question3", date: "date3"},
         responses: [{text: "reply1", date: "replydate1"},
                     {text: "reply2", date: "replydate2"},
                     {text: "reply3", date: "replydate3"},
                     {text: "reply4", date: "replydate4"}]
     },
     {
-        question: {text: "question4", date: "date2"},
+        question: {text: "question4", date: "date4"},
         responses: []
     },
 ]
@@ -270,7 +270,7 @@ export class Description extends React.Component {
                     <p className="assignment-name">{this.state.class + " - " +this.state.title}</p>
                     <ul>
                         <li>{"Due Date : " + this.state.deadline.slice(0,10)}</li>
-                        <li>{"Assignment Specification"}</li>
+                        <li className="assign-spec">{"Assignment Specification"}</li>
                         <li className="assign-info">{this.state.information}</li>
                     </ul>
                     <div>
