@@ -40,7 +40,6 @@ export class UpcomingAssignments extends React.Component {
                     // temp[1] = title;
                     // temp = temp.slice(1,4);
                     console.log(temp);
-                    // console.log(title);
                     switch(i){
                         case 0:
                             assign1 = temp;
@@ -132,7 +131,6 @@ function Pass() {
         <h3 className="assignment-name">{location.state}</h3>
     ); 
 }
-
 
 // returns name of the selected assignment
 export function Test({name}){ 

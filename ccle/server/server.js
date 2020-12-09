@@ -53,9 +53,6 @@ mongoose.connect(mongoDB, { useNewUrlParser: false, useUnifiedTopology: true })
         console.log(err)
     })
 
-
-
-
 function parseMatches(a_matches, sort) {
   console.log("PARSEMATCHES received: ", sort);
   var matches =[]

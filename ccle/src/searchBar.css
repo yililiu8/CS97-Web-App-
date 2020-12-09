@@ -14,11 +14,13 @@
 } */
 
 .searchbar {
+  font-family: 'Titillium Web';
+
   text-align: left;
   padding-left: 10px;
   margin: 30px 20px 30px 20px;
   font-size: 18px;
-  font-weight: lighter;
+  font-weight: bold;
   width: 50%;
   background-color: #ffffff;
   border-radius: 7px;
@@ -42,6 +44,7 @@
 }
 
 select {
+  font-family: 'Titillium Web';
   padding: 6px;
   margin-top: 8px;
   margin-left: 8px; 
@@ -64,4 +67,8 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+.text3{
+  font-family: 'Titillium Web';
 }
