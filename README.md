@@ -1,4 +1,4 @@
-# CS97 Web-App: CCLE 
+# CS97 Web-App: Ookla Manager 
 
 ### To run the code:
 
