@@ -7,7 +7,7 @@ const Users = require('../models/users');
 const Assignments = require('../models/assignments');
 const ClassInformation = require('../models/classinformation');
 
-var mongoDB = 'mongodb+srv://jlam7:Jlam2001@cluster0.ldqdm.mongodb.net/total_class_information?retryWrites=true&w=majority';
+var mongoDB = 'mongodb+srv://Emily_Vainberg:nreLh64ev12@cluster0.ldqdm.mongodb.net/total_class_information?retryWrites=true&w=majority';
 app.use('/uploadquestion', bodyParser.urlencoded({ extended: false }));
 app.use('/uploadquestion', bodyParser.json())
 /////////DATES AND TIMES FOR DEADLINE COMPARISONS///////////
