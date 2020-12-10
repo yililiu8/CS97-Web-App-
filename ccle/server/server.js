@@ -217,9 +217,23 @@ app.get('/calendar', async function(req, res){
 // Post route gets the information from assignments question and
 // you can uncomment the console.log statements to see how it works
 app.post('/uploadquestion', function(req, res) {
-  var question = (req.body.slice(-1)[0]).question;
-  var assignment = (req.body.slice(-1)[0]).assignment;
-  var responses = (req.body.slice(-1)[0]).responses;
+  // var question = (req.body.slice(-1)[0]).question;
+  // var assignment = (req.body.slice(-1)[0]).assignment;
+  // var responses = (req.body.slice(-1)[0]).responses;
+  var index = (req.body.index);
+  // console.log((req.body.m_disc.slice()[index]))
+  // console.log(index)
+  if (index == 0) {
+    var question = (req.body.m_disc.slice(-1)[0]).question;
+    var assignment = (req.body.m_disc.slice(-1)[0]).assignment;
+    var responses = (req.body.m_disc.slice(-1)[0]).responses;
+  }
+  else {
+    var question = (req.body.m_disc.slice()[index]).question;
+    var assignment = (req.body.m_disc.slice()[index]).assignment;
+    var responses = (req.body.m_disc.slice()[index]).responses;
+  }
+  var response
   // making a question/response object to be passed in
   var question_object = {
     text: question.text,
@@ -229,22 +243,34 @@ app.post('/uploadquestion', function(req, res) {
     question: question_object,
     responses: responses
   }
+  if(responses.length != 0) {
+    response = responses[responses.length - 1]
+  }
   
   mongoose.connect(mongoDB, function(err,db){
     if (err) { throw err; }
     else {
       var collection = db.collection("assignments");
       if (responses.length != 0) {
-        collection.update({"title": assignment}, {$pull: {discussion:{question: question}}}, false, true);
+        //collection.updateOne({"title": assignment}, {$pull: {"discussion":{"question": question}}}, false, true);
+        const obj = 'discussion.'+index+'.responses';
+        collection.findOneAndUpdate({"title": assignment}, {$push: {[obj]: response}},  function(err,doc) {
+          if (err) { throw err; }
+          else { console.log("Updated"); }
+        });  
       }
-      collection.findOneAndUpdate({"title": assignment}, {$push: {"discussion": question_response}},  function(err,doc) {
-        if (err) { throw err; }
-        else { console.log("Updated"); }
-      });  
+      else {
+        collection.findOneAndUpdate({"title": assignment}, {$push: {"discussion": question_response}},  function(err,doc) {
+          if (err) { throw err; }
+          else { console.log("Updated"); }
+        });  
+      }
     }
   });
   console.log(question);
   console.log(assignment);
+  console.log(responses);
+  console.log(response);
   res.json(req.body)
 })
 

@@ -245,13 +245,15 @@ export class Description extends React.Component {
     validateSubmitSpecific(e, i) {
         //the alert isn't necessarily need, just here for you to check it actually submits
         let message = "congrats on successfully replying to a question"
-        alert(message);
+        //alert(message);
         
         
         var today = new Date();
         let m_disc = this.state.discussion
         m_disc[i].responses.push({text: this.state.submit_reply[i], date: dateToString(today)})
-        m_disc[i].assignment = this.state.title
+        for (var j=0; j < m_disc.length; j++) {
+            m_disc[j].assignment = this.state.title
+        }
         //empty text field
         var reply_string_vals = this.state.submit_reply
         reply_string_vals[i] = ""
@@ -260,12 +262,16 @@ export class Description extends React.Component {
           discussion: m_disc,
           submit_reply: reply_string_vals
         })
+        let discAndIndex = {
+            m_disc: m_disc,
+            index: i
+        }
         fetch('/uploadquestion', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
             },
-            body: JSON.stringify(m_disc),
+            body: JSON.stringify(discAndIndex),
         })
         .then(function (response) {
             if (response.ok) {
@@ -320,13 +326,17 @@ export class Description extends React.Component {
           discussion: m_disc,
             submit_question: question_string_val
         })
+        let discAndIndex = {
+            m_disc: m_disc,
+            index: 0
+        }
         // Post request is done here
         fetch('/uploadquestion', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
             },
-            body: JSON.stringify(m_disc),
+            body: JSON.stringify(discAndIndex),
         })
         .then(function (response) {
             if (response.ok) {
