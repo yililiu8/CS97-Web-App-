@@ -122,17 +122,6 @@ app.get('/login', async function(req, res) {
     res.send({response: false});
 })
 
-
-app.get('/search/sort', async function(req, res) {
-  const {q} = req.query;
-  console.log("Called /search/sort get")
-  const a_matches = await Assignments.find({
-    title: {$regex: /(q)+{1}/, "$options": "i"}
-  });
-  const matches = parseMatches(a_matches);
-  
-})
-
 app.get('/search', async function(req, res){
     const q = req.query.q;
     const sort = req.query.sort;
@@ -148,8 +137,9 @@ app.get('/search', async function(req, res){
 })
 
 app.get('/', (req, res) => {
-    res.send(req);
+    res.redirect('/login');
 })
+
 app.listen(3000, () => {
   console.log("LISTENING!");
 })
@@ -172,13 +162,6 @@ app.get('/summary', async function(req, res){
   console.log("outputted summary object");
   res.send( {response: matches} );
 })
-
-
-//app.post('/updateGroup/:id', async function(req, res){
-//  const {q} = req.query;
-//  console.log("updating the assignment discussion");
-//
-//})
 
 //This creates arrays of upcoming asssignments
 function parseMatchesSummary(a_matches) {
