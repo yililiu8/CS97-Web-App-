@@ -27,10 +27,10 @@ li {
   float: left;
   font-size: 13px;
   line-height: 34px;
-  height: 280px;
+  height: 295px;
   padding-left: 9px;  
   text-align: left;
-  width: 159px;
+  width: 166.5px;
   overflow: auto; 
 }
 
@@ -49,11 +49,14 @@ td {
   content: "";
   display: table;
      white-space: nowrap;
+     margin-left: auto;
+      margin-right: auto;
 }
 
 table {
     table-layout: fixed; 
     width: 940px;
+    
 }
 
 .title {
@@ -65,13 +68,14 @@ table {
   color: #fff; 
   background-color: #45b6fe; 
   text-align: center; 
-  height: 40px; 
+  height: 40px;
+  align: center;
 }
 
 .filter-label {
     font-size: 14px; 
     margin-bottom: 32px; 
-    margin-top: 20px; 
+    margin-top: 30px;
     color: #666666; 
     text-align: center;
 }

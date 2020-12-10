@@ -369,10 +369,13 @@ export class Description extends React.Component {
             <div>
                 <div className= "header">
                     <div className= "logo">
-                        <Link to="/home">Ookla Manager</Link>
+                        <Link to="/home">
+                            <span className="ookla">Ookla </span>
+                            <span className="manager">Manager</span>
+                        </Link>
                     </div>
                     <div className="calendar-nav">
-                        <Link to="/login">Log Out</Link>
+                        <Link to="/login" className="calendar-nav">Log Out</Link>
                     </div>
                 </div>
             <div className="my-assignment">
@@ -454,11 +457,11 @@ function discussionExtract(discussion) {
 //converts variables of date type to string
 function dateToString(date)
 {
-    var datetime = date.getDate() + "/"
-                    + (date.getMonth()+1)  + "/"
+    var datetime = String(date.getMonth()+1).padStart(2, '0') + "/"
+                    + String(date.getDate()).padStart(2, '0') + "/"
                     + date.getFullYear() + " @ "
-                    + date.getHours() + ":"
-                    + date.getMinutes() + ":"
-                    + date.getSeconds();
+                    + String(date.getHours()).padStart(2, '0') + ":"
+                    + String(date.getMinutes()).padStart(2, '0') + ":"
+                    + String(date.getSeconds()).padStart(2, '0');
     return datetime;
 }

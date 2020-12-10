@@ -37,17 +37,19 @@ body {
 
 .calendar {
   background: #fff;
-  border: 0px solid #000000;
+  /*border: 0px solid #000000;*/
   font-size: 10px;
   font-weight: bold;
-  height: 525px;
+  height: 500px;
   margin-left: 20px;
   margin-top: 20px;
-  width: 880px;
+  width: 65%;
   display: flex;
   flex-direction: row;
   border-radius: 10px;  
-    min-width: 880px;
+  min-width: 890px;
+  float: right;
+  margin-right: 30px;
   /*box-shadow: 1px 1px 10px grey; */
 }
 
@@ -66,20 +68,50 @@ body {
 
 .logo {
     padding-top: 20px;
-    font-weight: 900; 
-    background: linear-gradient(to right, white 0%, #fbdb48 50%, white 50%);
+    font-weight: 900;
+    text-decoration: none;
+    transition: all 0.5s;
+    /*
+    background: linear-gradient(to right, #fbdb48 50%, white 50%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;*/
+}
+.ookla {
+    color:#fbdb48;
+    text-decoration: none;
+}
+.manager {
+    color: white;
+    text-decoration: none;
 }
 
+.logo:visited {
+    text-decoration: none;
+}
+
+.logo:hover{
+    font-size: 37px;
+    text-decoration: none;
+}
+
+.logo:hover span:after {
+    text-decoration: none;
+    font-size: 100px;
+    opacity: 1;
+    transition: all 0.5s;
+}
+
+/*
 .logo :nth-last-child()  {
     color: yellow; 
-    font-size: 100; 
-}
+    font-size: 100;
+    text-decoration: none;
+}*/
 
 .calendar-days {
-    margin-left: 20px;
-    margin-right: -35px;  
+    /*
+    margin-left: 10px;*/
+    margin-right: -37px;
 }
 
 .row1{

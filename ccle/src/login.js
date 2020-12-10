@@ -83,7 +83,8 @@ export class LoginScreen extends React.Component {
             <div>
            <div className= "header">
                <div className= "logo">
-                    Ookla Manager
+               <span className="ookla">Ookla </span>
+               <span className="manager">Manager</span>
                 </div>
             </div>
             <div className= "body">

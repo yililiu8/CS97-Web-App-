@@ -12,9 +12,9 @@ export class Events extends React.Component {
          <div className="events">
                   <ul>
                   <h1 style = {{fontFamily: 'Titillium Web', fontSize: '23px'}}>Click on any of the annoucements below to read more!</h1>
-                  <td onClick={()=> window.open("https://www.baltimoresun.com/coronavirus/bs-md-ucla-signs-nike-after-suing-under-armour-20201209-sgrvci3gk5e2fk6wgfmyvasnia-story.html")}><p1 style={{fontSize:'18px', fontFamily: 'Titillium Web', paddingLeft: '16px'}}>12/08/20: UCLA signs with Nike's Jordan Brand to fill Under Armor void</p1></td>
+                  <td className="web-links" onClick={()=> window.open("https://www.baltimoresun.com/coronavirus/bs-md-ucla-signs-nike-after-suing-under-armour-20201209-sgrvci3gk5e2fk6wgfmyvasnia-story.html")}><p1 className="web-links">12/08/20: UCLA signs with Nike's Jordan Brand to fill Under Armor void</p1></td>
                   <ul></ul>
-                  <td onClick={()=> window.open("https://newsroom.ucla.edu/releases/andrea-ghez-wins-2020-nobel-prize-in-physics")}><p2 style={{fontSize:'18px', fontFamily: 'Titillium Web', fontWeight: 'medium' , paddingLeft: '16px'}}>Congratulations to Andrea Ghez for being awarded the 2020 Nobel Prize in Physics!</p2></td>
+                  <td onClick={()=> window.open("https://newsroom.ucla.edu/releases/andrea-ghez-wins-2020-nobel-prize-in-physics")}><p1 className="web-links">Congratulations to Andrea Ghez for being awarded the 2020 Nobel Prize in Physics!</p1></td>
                   <h1 style = {{fontFamily: 'Titillium Web', fontSize: '20px'}}>Reminders:</h1>
                   <p1 style={{fontSize:'18px', fontFamily: 'Titillium Web', paddingLeft: '16px'}}>Finals Week: December 14th-18th</p1>
                   <ul></ul>

@@ -36,15 +36,18 @@ class Textbox extends React.Component {
                 }}
                 />    
                 <Route path="/login">
-                    <LoginScreen />  
+                    <LoginScreen />
                 </Route>
                 <Route exact path="/home">
                     <div className= "header">
                         <div className= "logo">
-                            <Link to="/home">Ookla Manager</Link>
+                            <Link to="/home">
+                                <span className="ookla">Ookla </span>
+                                <span className="manager">Manager</span>
+                            </Link>
                         </div>
                         <div className="calendar-nav">
-                            <Link to="/login">Log Out</Link>
+                            <Link to="/login" className="calendar-nav">Log Out</Link>
                         </div>
                     </div>
                     <div className='row1'>
