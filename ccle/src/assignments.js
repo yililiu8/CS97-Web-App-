@@ -225,8 +225,8 @@ export class Description extends React.Component {
     renderQuestion(i){
         if(this.state.discussion.length > i) {
             let render_question = this.state.discussion[i]
-            // if (render_question.question.text == "")
-            //     return NULL
+             if (render_question.question.text == "")
+                 return
             let title = render_question.question.text + ", posted on: " + render_question.question.date
             let replies = []
                 //let reply_dates = []
