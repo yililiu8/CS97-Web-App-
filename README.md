@@ -17,6 +17,7 @@ This will install all the required dependencies.
 - This will run the server and client on two separate terminals
 - If the terminal prompts to run on a different port number, type 'y' or 'yes'
 
-For login credentials::
-email: guest@gmail.com
-password: Psivakumar123
+For login credentials:
+
+- email: guest@gmail.com
+- password: Psivakumar123
