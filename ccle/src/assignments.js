@@ -225,8 +225,8 @@ export class Description extends React.Component {
     renderQuestion(i){
         if(this.state.discussion.length > i) {
             let render_question = this.state.discussion[i]
-            // if (render_question.question.text == "")
-            //     return NULL
+            if (render_question.question.text == "")
+                 return
             let title = render_question.question.text + ", posted on: " + render_question.question.date
             let replies = []
                 //let reply_dates = []
@@ -251,7 +251,7 @@ export class Description extends React.Component {
         var today = new Date();
         let m_disc = this.state.discussion
         m_disc[i].responses.push({text: this.state.submit_reply[i], date: dateToString(today)})
-        
+        m_disc[i].assignment = this.state.title
         //empty text field
         var reply_string_vals = this.state.submit_reply
         reply_string_vals[i] = ""
@@ -260,7 +260,25 @@ export class Description extends React.Component {
           discussion: m_disc,
           submit_reply: reply_string_vals
         })
-        
+        fetch('/uploadquestion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify(m_disc),
+        })
+        .then(function (response) {
+            if (response.ok) {
+                return response.json;
+            }
+            return Promise.reject(response);
+        })
+        .then(data => {
+            console.log("DATA SENT CLIENT SIDE: ", data);
+        })
+        .catch(error => {
+            console.error("ERROR CLIENT SIDE: ", error);
+        })
         //you might need to use this below if you use the database but not 100% sure
         //window.location.reload()
     }
