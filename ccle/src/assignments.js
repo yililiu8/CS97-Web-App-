@@ -368,7 +368,7 @@ export class Description extends React.Component {
             <div>
                 <div className= "header">
                     <div className= "logo">
-                        <Link to="/home">NEW CCLE</Link>
+                        <Link to="/home">Ookla Manager</Link>
                     </div>
                     <div className="calendar-nav">
                         <Link to="/login">Log Out</Link>
