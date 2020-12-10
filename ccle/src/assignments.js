@@ -176,7 +176,7 @@ export class Description extends React.Component {
             class: "",
             deadline: "",
             information: "", // complete assignment specification
-            discussion: disc,
+            discussion: [],
             submit_question: "", //question being sumbited
             submit_reply: ["", "", "", "", ""], //reply being submitted
         }
@@ -267,25 +267,58 @@ export class Description extends React.Component {
     validateSubmit(e) {
         //the alert isn't necessarily need, just here for you to check it actually submits
         let ques = "congrats on successfully sumbitting your question."
-        alert(ques);
+        //alert(ques);
         //you would need to add it to the database rather than an array but this is roughly how to submit a question:
         var today = new Date();
         let m_disc = this.state.discussion
         var reply_strings = this.state.submit_reply
         reply_strings.push("")
+        //This is what I send to the backend eventually
         m_disc.push({
                 question: {text: this.state.submit_question, date: dateToString(today)},
                 responses: [],
-                submit_reply: reply_strings
+                assignment: this.state.title
+                //submit_reply: reply_strings
         })
+        // Some random tests
+        console.log("This is the question: ",this.state.submit_question)
+        console.log("This is the assignment title: ", this.state.title);
         
         //empty text field
         var question_string_val = this.state.submit_question
         question_string_val = ""
+        // var sendToBackend = {
+        //     question: {
+        //         text: m_disc.question.text,
+        //         date: m_disc.question.date,
+        //     },
+        //     responses: m_disc.responses,
+        //     assignment: this.state.title,
+        // }
         
         this.setState({
           discussion: m_disc,
             submit_question: question_string_val
+        })
+        // Post request is done here
+        fetch('/uploadquestion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify(m_disc),
+        })
+        .then(function (response) {
+            if (response.ok) {
+                return response.json;
+            }
+            return Promise.reject(response);
+        })
+        .then(data => {
+            console.log("DATA SENT CLIENT SIDE: ", data);
+        })
+        .catch(error => {
+            console.error("ERROR CLIENT SIDE: ", error);
         })
         //you might need to use this below if you use the database but not 100% sure
         //window.location.reload()

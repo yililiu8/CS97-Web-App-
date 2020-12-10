@@ -2,11 +2,14 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const Users = require('../models/users');
 const Assignments = require('../models/assignments');
 const ClassInformation = require('../models/classinformation');
-var mongoDB = 'mongodb+srv://jlam7:Jlam2001@cluster0.ldqdm.mongodb.net/total_class_information?retryWrites=true&w=majority';
 
+var mongoDB = 'mongodb+srv://jlam7:Jlam2001@cluster0.ldqdm.mongodb.net/total_class_information?retryWrites=true&w=majority';
+app.use('/uploadquestion', bodyParser.urlencoded({ extended: false }));
+app.use('/uploadquestion', bodyParser.json())
 /////////DATES AND TIMES FOR DEADLINE COMPARISONS///////////
 //our current date
 //we turn the dates into string to make them easier to compare
@@ -44,7 +47,7 @@ function compareDate(deadline) {
 }
 /////////DATES AND TIMES FOR DEADLINE COMPARISONS///////////
 
-mongoose.connect(mongoDB, { useNewUrlParser: false, useUnifiedTopology: true })
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("Connection to database established.")
     })
@@ -209,6 +212,17 @@ app.get('/calendar', async function(req, res){
   const matches = parseMatchesCalendar(d_matches);
   console.log("outputted calendar object");
   res.send( {response: matches} );
+})
+
+// Post route gets the information from assignments question and
+// you can uncomment the console.log statements to see how it works
+app.post('/uploadquestion', function(req, res) {
+  var question = (req.body.slice(-1)[0]).question;
+  var assignment = (req.body.slice(-1)[0]).assignment;
+
+  console.log(question);
+  console.log(assignment);
+  res.json(req.body)
 })
 
 //This creates array of upcoming discussions, lectures, OHs
