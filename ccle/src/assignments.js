@@ -369,7 +369,7 @@ export class Description extends React.Component {
             <div>
                 <div className= "header">
                     <div className= "logo">
-                        <Link to="/home">
+                <Link to="/home" style={{ textDecoration: 'none' }}>
                             <span className="ookla">Ookla </span>
                             <span className="manager">Manager</span>
                         </Link>
