@@ -25,16 +25,18 @@ export class UpcomingAssignments extends React.Component {
             })
             .then(data => {
                 const matches = data.response; // array of all the assignments
-                const num_assign = 4; // number of assignments
+                const order = data.order;
+                const num_assign = 4; // number of assignments shown
                 const num_attr = 4; // number of attributes per assignment
                 var assign1, assign2, assign3, assign4 = [];
                 for (let i = 0; i < num_assign; i++){
+                    let ordered = order[i]
                     let temp = [];
                     for (let j = 0; j < num_attr; j++){
                         if (j==2)
-                            temp.push(matches[j][i].slice(0,10));
+                            temp.push(matches[j][ordered].slice(0,10));
                         else
-                            temp.push(matches[j][i]);
+                            temp.push(matches[j][ordered]);
                     }
                     // let title = temp[0] + " - " + temp[1];
                     // temp[1] = title;
