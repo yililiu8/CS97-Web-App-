@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 //import Button from "react-bootstrap/Button";
 import Button from '@material-ui/core/Button';
 import './login.css';
+
 import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate} from "react-router-dom";
 
 var data1 = false;
@@ -85,6 +86,7 @@ export class LoginScreen extends React.Component {
                     NEW CCLE
                 </div>
             </div>
+            <div className= "body">
                <div className="login-box">
                  <h3 className="Login"> Student Login </h3>
                  <br />
@@ -119,6 +121,7 @@ export class LoginScreen extends React.Component {
                    </Button>
                  </Form>
                    </div>
+               </div>
                </div>
                </div>
         );

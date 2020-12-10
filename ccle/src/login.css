@@ -1,57 +1,58 @@
+body{
+    background-image: url(./pic.jpg);
+}
 
 .login-box {
-  margin-left: 310px;   
   background: #fff;
-  float: left;
+  float: center;
+  margin-left: 500px;
   font-weight: lighter;
   font-size: 25px;
   line-height: 34px;
-  height: 500px;
-  margin-top: 30px;
-  width: 800px;
-  border-radius: 15px; 
-  
+  height: 330px;
+  margin-top: 60px;
+  width:500px;
+  border-radius: 8px; 
 }
 .login-items {
-    padding-left: 100px; 
+    padding-left: 30px; 
 }
 
 .Login {
-    padding-bottom: 15px;
+    padding-bottom: 0px;
     text-align: center; 
     color: #23395d; 
-    /*
-    background: #77c3ec; 
-    border-top-right-radius: 7px; 
-    border-top-left-radius: 7px; 
-    color: #fff; 
-    margin-top: -12px; 
-    padding-top: 15px; 
-    font-weight: 600; */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: bold;
+    padding-top: 30px;
 }
 
 .email-text {
+   font-family: Georgia, 'Times New Roman', Times, serif;
    font-size: 16px; 
-   margin-right: 500px; 
+   margin-right: 600px; 
+   padding-top: 1px;
+   float: left;
 }
 
 .login-field {
-    width: 600px; 
+    width: 450px; 
     height: 28px; 
     border-radius: 10px; 
 }
 
 .login-field2 {
-    width: 600px;
+    float: left;
+    width: 450px;
     height: 28px;
     border-radius: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .login-button {
-    width: 610px; 
+    width: 100px; 
     height: 35px; 
-    /*background-color: #D6ecf3; */
+    margin-left: 400px;
     font: "Century Gothic", Futura, sans-serif;
     border-radius: 10px;
     background-color: blue; 
