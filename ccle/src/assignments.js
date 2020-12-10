@@ -202,8 +202,8 @@ export class Description extends React.Component {
                     class: matches.class,
                     information: matches.information,
                     deadline: matches.deadline,
-                    //discussion: matches.discussion,
-                    //submit_reply: textField_replies //uncomment this later
+                    discussion: matches.discussion,
+                    submit_reply: textField_replies //uncomment this later
                 })
             })
         }
