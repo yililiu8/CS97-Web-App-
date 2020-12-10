@@ -202,8 +202,8 @@ export class Description extends React.Component {
                     class: matches.class,
                     information: matches.information,
                     deadline: matches.deadline,
-                    //discussion: matches.discussion,
-                    //submit_reply: textField_replies //uncomment this later
+                    discussion: matches.discussion,
+                    submit_reply: textField_replies //uncomment this later
                 })
             })
         }
@@ -225,6 +225,8 @@ export class Description extends React.Component {
     renderQuestion(i){
         if(this.state.discussion.length > i) {
             let render_question = this.state.discussion[i]
+            if (render_question.question.text == "")
+                return
             let title = render_question.question.text + ", posted on: " + render_question.question.date
             let replies = []
                 //let reply_dates = []
@@ -368,7 +370,7 @@ export class Description extends React.Component {
                   </Form.Group>
                     </Form>
                 </div>
-                <div className="post-label">Top Posts</div>
+                <div className="post-label">Discussion Posts:</div>
                     {[...Array(num_questions)].map((x, i) =>
                     <div> {this.renderQuestion(i)} </div>
                 )}
