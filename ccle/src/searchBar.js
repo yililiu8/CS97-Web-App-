@@ -2,7 +2,9 @@ import React from 'react';
 //import ReactDOM from 'react-dom';
 import './searchBar.css';
 import {BrowserRouter as Router, Route, Switch, Link, Redirect, useRouteMatch, useNavigate, useParams, useLocation} from "react-router-dom"; 
-//import Logo from "./design.jpg"
+//import assignments from '../models/assignments';
+
+
 
 export class SearchBar extends React.Component {
     constructor(props) {
@@ -12,20 +14,8 @@ export class SearchBar extends React.Component {
         ],
             searchValue: "",
             sortOption: "Sort by:",
+            loading: false,
         }
-    }
-
-    renderButton(txt){
-        //const navigate = useNavigate(); 
-        return (
-            <div key = {txt}>
-             <Link to={{
-                pathname: txt
-            }}>
-                {txt}
-            </Link>
-            </div>
-        ); 
     }
 
     handleChange = (e) => {
@@ -35,6 +25,9 @@ export class SearchBar extends React.Component {
         if(!this.state.loading) {
             fetch(`/search?q=${e.target.value}&sort=${this.state.sortOption}`)
             .then(res => {
+                this.setState({
+                    loading: true
+                })
                 return res.json()
             })
             .then(data => {
@@ -51,8 +44,12 @@ export class SearchBar extends React.Component {
                         </div>
                     )
                 });
+                return listMatch
+            })
+            .then(final => {
                 this.setState({
-                    assignments: this.state.searchValue ? listMatch : null,
+                    assignments: this.state.searchValue ? final : null,
+                    loading: false
                 })
             })
         }
@@ -67,21 +64,24 @@ export class SearchBar extends React.Component {
      
     render() {
         return (
+            <div className="search-box">
+            <div className="search-title">{"Search for Assignments"}</div>
                 <div className = "searchbar">
-                            <label htmlFor="search"> Search by Assignment Name: </label>
+                    <p1>Search by Assignment Name:</p1>
+                            {/* <label htmlFor="search"> Search by Assignment Name: </label> */}
                             <input type="text" value = {this.state.searchValue} onChange = {this.handleChange} placeholder="Search" />
                             <div class ="text3">
-                            <ul><p3> {("You can sort all the assignments by date or category weight")}</p3></ul>
+                            <p3 style= {{fontSize:'14px', fontFamily: 'Titillium Web'}}>You can sort by grade weightage or nearest deadlines</p3>
                             </div>
                             <select onChange={this.handleClick} placeholder="Sort by">
                                 <option>Sort by:</option>
                                 <option>Grade Weightage</option>
-                                {/* <option>Alphabetical Order</option> */}
                                 <option>Due Date</option>
                             </select>
                             <ul id="special">
                                 {this.state.assignments}
                             </ul>
+                </div>
                 </div>
         )
     }

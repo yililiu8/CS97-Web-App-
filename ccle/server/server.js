@@ -7,7 +7,7 @@ const Users = require('../models/users');
 const Assignments = require('../models/assignments');
 const ClassInformation = require('../models/classinformation');
 
-var mongoDB = 'mongodb+srv://jlam7:Jlam2001@cluster0.ldqdm.mongodb.net/total_class_information?retryWrites=true&w=majority';
+var mongoDB = 'mongodb+srv://Emily_Vainberg:nreLh64ev12@cluster0.ldqdm.mongodb.net/total_class_information?retryWrites=true&w=majority';
 app.use('/uploadquestion', bodyParser.urlencoded({ extended: false }));
 app.use('/uploadquestion', bodyParser.json())
 /////////DATES AND TIMES FOR DEADLINE COMPARISONS///////////
@@ -122,17 +122,6 @@ app.get('/login', async function(req, res) {
     res.send({response: false});
 })
 
-
-app.get('/search/sort', async function(req, res) {
-  const {q} = req.query;
-  console.log("Called /search/sort get")
-  const a_matches = await Assignments.find({
-    title: {$regex: /(q)+{1}/, "$options": "i"}
-  });
-  const matches = parseMatches(a_matches);
-  
-})
-
 app.get('/search', async function(req, res){
     const q = req.query.q;
     const sort = req.query.sort;
@@ -148,8 +137,9 @@ app.get('/search', async function(req, res){
 })
 
 app.get('/', (req, res) => {
-    res.send(req);
+    res.redirect('/login');
 })
+
 app.listen(3000, () => {
   console.log("LISTENING!");
 })
@@ -172,13 +162,6 @@ app.get('/summary', async function(req, res){
   console.log("outputted summary object");
   res.send( {response: matches} );
 })
-
-
-//app.post('/updateGroup/:id', async function(req, res){
-//  const {q} = req.query;
-//  console.log("updating the assignment discussion");
-//
-//})
 
 //This creates arrays of upcoming asssignments
 function parseMatchesSummary(a_matches) {
@@ -217,8 +200,23 @@ app.get('/calendar', async function(req, res){
 // Post route gets the information from assignments question and
 // you can uncomment the console.log statements to see how it works
 app.post('/uploadquestion', function(req, res) {
-  var question = (req.body.slice(-1)[0]).question;
-  var assignment = (req.body.slice(-1)[0]).assignment;
+  // var question = (req.body.slice(-1)[0]).question;
+  // var assignment = (req.body.slice(-1)[0]).assignment;
+  // var responses = (req.body.slice(-1)[0]).responses;
+  var index = (req.body.index);
+  // console.log((req.body.m_disc.slice()[index]))
+  // console.log(index)
+  if (index == 0) {
+    var question = (req.body.m_disc.slice(-1)[0]).question;
+    var assignment = (req.body.m_disc.slice(-1)[0]).assignment;
+    var responses = (req.body.m_disc.slice(-1)[0]).responses;
+  }
+  else {
+    var question = (req.body.m_disc.slice()[index]).question;
+    var assignment = (req.body.m_disc.slice()[index]).assignment;
+    var responses = (req.body.m_disc.slice()[index]).responses;
+  }
+  var response
   // making a question/response object to be passed in
   var question_object = {
     text: question.text,
@@ -226,21 +224,36 @@ app.post('/uploadquestion', function(req, res) {
   }
   var question_response = {
     question: question_object,
-    responses: []
+    responses: responses
+  }
+  if(responses.length != 0) {
+    response = responses[responses.length - 1]
   }
   
   mongoose.connect(mongoDB, function(err,db){
     if (err) { throw err; }
     else {
       var collection = db.collection("assignments");
-      collection.findOneAndUpdate({"title": assignment}, {$push: {"discussion": question_response}},  function(err,doc) {
-        if (err) { throw err; }
-        else { console.log("Updated"); }
-      });  
+      if (responses.length != 0) {
+        //collection.updateOne({"title": assignment}, {$pull: {"discussion":{"question": question}}}, false, true);
+        const obj = 'discussion.'+index+'.responses';
+        collection.findOneAndUpdate({"title": assignment}, {$push: {[obj]: response}},  function(err,doc) {
+          if (err) { throw err; }
+          else { console.log("Updated"); }
+        });  
+      }
+      else {
+        collection.findOneAndUpdate({"title": assignment}, {$push: {"discussion": question_response}},  function(err,doc) {
+          if (err) { throw err; }
+          else { console.log("Updated"); }
+        });  
+      }
     }
   });
   console.log(question);
   console.log(assignment);
+  console.log(responses);
+  console.log(response);
   res.json(req.body)
 })
 

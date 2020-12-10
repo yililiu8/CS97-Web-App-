@@ -225,7 +225,11 @@ export class Description extends React.Component {
     renderQuestion(i){
         if(this.state.discussion.length > i) {
             let render_question = this.state.discussion[i]
+<<<<<<< HEAD
              if (render_question.question.text == "")
+=======
+            if (render_question.question.text == "")
+>>>>>>> e57f66507043f6082a8ea1012b1f81222d2ac831
                  return
             let title = render_question.question.text + ", posted on: " + render_question.question.date
             let replies = []
@@ -245,13 +249,15 @@ export class Description extends React.Component {
     validateSubmitSpecific(e, i) {
         //the alert isn't necessarily need, just here for you to check it actually submits
         let message = "congrats on successfully replying to a question"
-        alert(message);
+        //alert(message);
         
         
         var today = new Date();
         let m_disc = this.state.discussion
         m_disc[i].responses.push({text: this.state.submit_reply[i], date: dateToString(today)})
-        
+        for (var j=0; j < m_disc.length; j++) {
+            m_disc[j].assignment = this.state.title
+        }
         //empty text field
         var reply_string_vals = this.state.submit_reply
         reply_string_vals[i] = ""
@@ -260,7 +266,29 @@ export class Description extends React.Component {
           discussion: m_disc,
           submit_reply: reply_string_vals
         })
-        
+        let discAndIndex = {
+            m_disc: m_disc,
+            index: i
+        }
+        fetch('/uploadquestion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify(discAndIndex),
+        })
+        .then(function (response) {
+            if (response.ok) {
+                return response.json;
+            }
+            return Promise.reject(response);
+        })
+        .then(data => {
+            console.log("DATA SENT CLIENT SIDE: ", data);
+        })
+        .catch(error => {
+            console.error("ERROR CLIENT SIDE: ", error);
+        })
         //you might need to use this below if you use the database but not 100% sure
         //window.location.reload()
     }
@@ -302,13 +330,17 @@ export class Description extends React.Component {
           discussion: m_disc,
             submit_question: question_string_val
         })
+        let discAndIndex = {
+            m_disc: m_disc,
+            index: 0
+        }
         // Post request is done here
         fetch('/uploadquestion', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
             },
-            body: JSON.stringify(m_disc),
+            body: JSON.stringify(discAndIndex),
         })
         .then(function (response) {
             if (response.ok) {
@@ -340,7 +372,7 @@ export class Description extends React.Component {
             <div>
                 <div className= "header">
                     <div className= "logo">
-                        <Link to="/home">NEW CCLE</Link>
+                        <Link to="/home">Ookla Manager</Link>
                     </div>
                     <div className="calendar-nav">
                         <Link to="/login">Log Out</Link>

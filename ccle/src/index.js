@@ -41,7 +41,7 @@ class Textbox extends React.Component {
                 <Route exact path="/home">
                     <div className= "header">
                         <div className= "logo">
-                            <Link to="/home">NEW CCLE</Link>
+                            <Link to="/home">Ookla Manager</Link>
                         </div>
                         <div className="calendar-nav">
                             <Link to="/login">Log Out</Link>
