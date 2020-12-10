@@ -5,29 +5,21 @@ const axios = require('axios');
 
 function Square(text, date, events, assignments) {
     const lecture = "https://ucla.zoom.us/j/92610844994?pwd=a1dNMGNrakM3Q1JqZ284T1hsMUVadz09&"
+    const num_assign = assignments.length
+    const num_events = events.length
     return (<div className="square">
               <div className="box">
               {text} : {date}
                   <div className="Cal-assignments">
                       <ul className="cal-list-format">
-                          <li>{assignments[0]}</li>
-                          <li>{assignments[1]}</li>
-                          <li>{assignments[2]}</li>
-                          <li>{assignments[3]}</li>
+                        {[...Array(num_assign)].map((x, k) =>
+                        <li> {assignments[k]} </li>)}
                       </ul>
                   </div>
                   <div className="Cal-events">
                       <ul className="cal-list-format">
-                          <li><a href="https://zoom.us/" className="zoom-links">{events[0]}</a></li>
-                          <li><a href="https://zoom.us/" className="zoom-links">{events[1]}</a></li>
-                          <li><a href="https://zoom.us/" className="zoom-links">{events[2]}</a></li>
-                          <li><a href="https://zoom.us/" className="zoom-links">{events[3]}</a></li>
-                          <li><a href="https://zoom.us/" className="zoom-links">{events[4]}</a></li>
-                          <li><a href="https://zoom.us/" className="zoom-links">{events[5]}</a></li>
-                          <li><a href="https://zoom.us/" className="zoom-links">{events[6]}</a></li>
-                          <li><a href="https://zoom.us/" className="zoom-links">{events[7]}</a></li>
-                          <li><a href="https://zoom.us/" className="zoom-links">{events[8]}</a></li>
-                          <li><a href="https://zoom.us/" className="zoom-links">{events[9]}</a></li>
+                        {[...Array(num_events)].map((x, k) =>
+                            <li><a href="https://zoom.us/" className="zoom-links"> {events[k]} </a></li>)}
                       </ul>
                   </div>
               </div>
