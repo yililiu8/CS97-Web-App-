@@ -159,8 +159,31 @@ app.get('/summary', async function(req, res){
   console.log("called app.get for assignment summary");
   const d_matches = await Assignments.find({});
   const matches = parseMatchesSummary(d_matches);
+
+  // sorting matches by deadline
+  var original_dueDates = matches[2];
+  var sorted_dueDates = matches[2];
+  sorted_dueDates.sort(function(a,b){
+    if (a < b)         return -1;
+    else if(a > b)     return  1;
+    else               return 0;
+  });
+  var order = [];
+  for (i in sorted_dueDates){
+    for (let j = 0; j < original_dueDates.length; j++){
+      if (sorted_dueDates[i] == original_dueDates[j]) {
+        //console.log(sorted_dueDates[i])
+        //console.log(original_dueDates[i])
+        order.push(j)
+        //console.log(j)
+      }
+    }
+  }
+  //console.log(original_dueDates)
+  //console.log(sorted_dueDates)
+  //console.log(order)
   console.log("outputted summary object");
-  res.send( {response: matches} );
+  res.send( {response: matches, order: order} );
 })
 
 //This creates arrays of upcoming asssignments
