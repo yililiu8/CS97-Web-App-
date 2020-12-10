@@ -219,7 +219,26 @@ app.get('/calendar', async function(req, res){
 app.post('/uploadquestion', function(req, res) {
   var question = (req.body.slice(-1)[0]).question;
   var assignment = (req.body.slice(-1)[0]).assignment;
-
+  // making a question/response object to be passed in
+  var question_object = {
+    text: question.text,
+    date: question.date
+  }
+  var question_response = {
+    question: question_object,
+    responses: []
+  }
+  
+  mongoose.connect(mongoDB, function(err,db){
+    if (err) { throw err; }
+    else {
+      var collection = db.collection("assignments");
+      collection.findOneAndUpdate({"title": assignment}, {$push: {"discussion": question_response}},  function(err,doc) {
+        if (err) { throw err; }
+        else { console.log("Updated"); }
+      });  
+    }
+  });
   console.log(question);
   console.log(assignment);
   res.json(req.body)
