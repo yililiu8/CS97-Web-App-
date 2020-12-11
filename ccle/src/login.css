@@ -1,5 +1,9 @@
 body{
-    background-image: url(./pic.jpg);
+    background-image: url(./path.jpg);
+    background-repeat: no-repeat;
+    background-size: cover; 
+    height: 100%; 
+    background-position: top;
 }
 
 .login-box {
