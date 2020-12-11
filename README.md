@@ -16,3 +16,8 @@ This will install all the required dependencies.
 - Without closing the current terminal tab, open a new terminal tab and make sure you're in the ccle directory: `npm start`
 - This will run the server and client on two separate terminals
 - If the terminal prompts to run on a different port number, type 'y' or 'yes'
+
+For login credentials:
+
+- email: guest@gmail.com
+- password: Psivakumar123
