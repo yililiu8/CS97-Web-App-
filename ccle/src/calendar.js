@@ -51,18 +51,10 @@ function Square(text, date, events, assignments) {
             currentDate: today, 
             dates: date,
             meetings: {
-                0: [],
-                1: [],
-                2: [],
-                3: [],
-                4: []
+                0: [], 1: [], 2: [], 3: [], 4: []
             },
             assignments: {
-                0: [],
-                1: [],
-                2: [],
-                3: [],
-                4: []
+                0: [], 1: [], 2: [], 3: [], 4: []
             },
             queried: false,
             db_assignments: [[],[],[],[]],
@@ -202,13 +194,7 @@ function Square(text, date, events, assignments) {
     //update assignments based on week
     find_assignments() {
         var db_assign = this.state.db_assignments
-        var m_assignments = {
-                0: [],
-                1: [],
-                2: [],
-                3: [],
-                4: []
-        }
+        var m_assignments = { 0: [], 1: [], 2: [], 3: [], 4: []}
             
         for(var j = 0; j < db_assign[0].length; j++) {
             var assign = "- " + db_assign[0][j] + " " + db_assign[1][j] + " Due"
@@ -257,7 +243,7 @@ function Square(text, date, events, assignments) {
                 return res.json()
             })
             .then(data => {
-                const matches = data.response; // array of all the assignments
+                const matches = data.response;
                 let temp = [];
                 temp.push(matches[0])
                 temp.push(matches[1])
@@ -376,7 +362,6 @@ function getMeetings(course, m_meetings)
     }
     //add office hours
     for(var k = 0; k < course.office_hours.length; k++) {
-        //get last name only
         let name = course.office_hours[k].person.split(',')
         let captialize = name[0][0] + name[0].substring(1, name[0].length).toLowerCase()
         var o_h = "- Office Hours with " + captialize + " @" +  course.office_hours[k].time[0]
