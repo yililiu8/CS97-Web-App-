@@ -3,6 +3,11 @@
 body {
   font: 1px Open Sans; 
   background: #ececec; 
+  
+}
+
+.page{
+  background: url(./pic.jpg)
 }
 
 .header {

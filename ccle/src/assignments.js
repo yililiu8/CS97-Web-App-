@@ -38,9 +38,6 @@ export class UpcomingAssignments extends React.Component {
                         else
                             temp.push(matches[j][ordered]);
                     }
-                    // let title = temp[0] + " - " + temp[1];
-                    // temp[1] = title;
-                    // temp = temp.slice(1,4);
                     console.log(temp);
                     switch(i){
                         case 0:
